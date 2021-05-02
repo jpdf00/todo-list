@@ -1,137 +1,63 @@
-import { addProject, getProjects, drawProjects } from './projects';
-import {
-  addTask, drawTasksByProject, changeTask, dltTask, changePriority, drawFormTasks, updateTask,
-} from './tasks';
+import { populateStorage } from './projectsLogic.js';
+import { saveNewProject, drawProjects } from './projectsHTML';
 
-function completTask() {
-  const completTask = document.querySelectorAll('.completTask');
-  completTask.forEach((check) => {
-    check.addEventListener('click', () => {
-      changeTask(parseInt(check.id.match(/\d+/gm), 10));
-    });
-  });
-}
+// Populate localStorage on first use
+populateStorage('projects'); /* Project */
+populateStorage('tasks'); /* Task */
 
-function modifyPriority() {
-  const priorityDropdown = document.querySelectorAll('.changePriority');
-  priorityDropdown.forEach((dropDown) => {
-    dropDown.addEventListener('change', () => {
-      changePriority(parseInt(dropDown.id.match(/\d+/gm), 10), dropDown.value);
-    });
-  });
-}
-
-function deleteTask() {
-  const deleteTask = document.querySelectorAll('.deleteTask');
-  deleteTask.forEach((button) => {
-    button.addEventListener('click', () => {
-      dltTask(parseInt(button.id.match(/\d+/gm), 10));
-    });
-  });
-}
-
-function saveTask() {
-  const save = document.querySelector('.updateTask');
-  save.addEventListener('click', () => {
-    const project = updateTask(parseInt(save.id.match(/\d+/gm), 10));
-    const editForm = document.querySelector('#trForm');
-    const tBody = document.getElementById('tableBody');
-    tBody.removeChild(editForm);
-    const taskContainer = document.querySelector('#taskContainer');
-    taskContainer.innerHTML = '';
-    taskContainer.append(drawTasksByProject(project));
-    // eslint-disable-next-line no-use-before-define
-    editTask();
-  });
-}
-
-function editTask() {
-  const editTask = document.querySelectorAll('.editTask');
-  editTask.forEach((button) => {
-    button.addEventListener('click', () => {
-      drawFormTasks(parseInt(button.id.match(/\d+/gm), 10));
-      saveTask();
-    });
-  });
-}
-
-function refreshEventListener() {
-  const projectButton = document.querySelectorAll('.projectButton');
-  projectButton.forEach((button) => {
-    button.addEventListener('click', () => {
-      const taskContainer = document.querySelector('#taskContainer');
-      taskContainer.innerHTML = '';
-      taskContainer.append(drawTasksByProject(button.textContent));
-      completTask();
-      deleteTask();
-      modifyPriority();
-      editTask();
-    });
-  });
-  completTask();
-  deleteTask();
-  modifyPriority();
-  editTask();
-}
-
-const taskSubmit = document.querySelector('#taskSubmit');
-
-taskSubmit.addEventListener('click', () => {
-  const taskContainer = document.querySelector('#taskContainer');
-  const name = document.getElementById('taskName').value;
-  const description = document.getElementById('taskDescription').value;
-  const priority = document.getElementById('taskPriority').value;
-  const project = document.getElementById('taskProject').value;
-  const dueDate = document.getElementById('taskDueDate').value;
-  taskContainer.innerHTML = '';
-  taskContainer.append(addTask(name, description, priority, project, dueDate));
-  refreshEventListener();
-});
-
-const projectSubmit = document.querySelector('#projectSubmit');
-
-projectSubmit.addEventListener('click', () => {
-  const projectContainer = document.querySelector('#projectContainer');
-  const name = document.getElementById('projectName').value;
-  projectContainer.innerHTML = '';
-  projectContainer.append(addProject(name));
-  getProjects('#taskProject');
-  refreshEventListener();
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-  const projectContainer = document.querySelector('#projectContainer');
-  const taskContainer = document.querySelector('#taskContainer');
-  taskContainer.innerHTML = '';
-  projectContainer.innerHTML = '';
-  projectContainer.append(drawProjects());
-  taskContainer.append(drawTasksByProject('all'));
-  getProjects('#taskProject');
-  refreshEventListener();
-});
+// Draw the page on load
+drawProjects(); /* Project */
 
 // Get the modal
-var modal = document.getElementById("projectFormModal");
+const projectFormModal = document.querySelector("#projectFormModal"); /* Project */
+const taskFormModal = document.querySelector("#taskFormModal"); /* Task */
 
 // Get the button that opens the modal
-var btn = document.querySelector("#btnNewProject");
+const btnNewProject = document.querySelector("#btnNewProject"); /* Project */
+const btnNewTask = document.querySelector("#btnNewTask"); /* Task */
 
-// Get the <span> element that closes the modal
-var span = document.querySelector("#btnClose");
+// Get the button that closes the modal
+const btnCloseProject = document.querySelector("#btnCloseProject"); /* Project */
+const btnCloseTask = document.querySelector("#btnCloseTask"); /* Task */
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.removeAttribute('hidden');
-}
+// Get the button that saves the information
+const saveProject = document.querySelector("#saveProject"); /* Project */
+const saveTask = document.querySelector("#saveTask"); /* Task */
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.setAttribute('hidden', 'true');
-}
+// Show project form
+btnNewProject.addEventListener('click', () => {
+  projectFormModal.removeAttribute('hidden');
+});
 
-// When the user clicks anywhere outside of the modal, close it
+// Show task form
+btnNewTask.addEventListener('click', () => {
+  taskFormModal.removeAttribute('hidden');
+});
+
+// Hide project form (for close button)
+btnCloseProject.addEventListener('click', () => {
+  projectFormModal.setAttribute('hidden', 'true');
+});
+
+// Hide task form (for close button)
+btnCloseTask.addEventListener('click', () => {
+  taskFormModal.setAttribute('hidden', 'true');
+});
+
+// Hide form (for background)
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.setAttribute('hidden', 'true');
+  // Project form
+  if (event.target == projectFormModal) {
+    projectFormModal.setAttribute('hidden', 'true');
+  }
+  // Task Form
+  if (event.target == taskFormModal) {
+    taskFormModal.setAttribute('hidden', 'true');
   }
 }
+
+
+saveProject.addEventListener('click', () => {
+  saveNewProject();
+  projectFormModal.setAttribute('hidden', 'true');
+});
