@@ -1,31 +1,25 @@
 import { addProjectToProjects } from './projectsLogic.js';
 
 const ProjectHTML = (project) => {
-  console.log(project.name);
   const projectItem = document.createElement('div');
-  projectItem.setAttribute('class', 'projectItem flexContainer');
+  projectItem.setAttribute('class', 'itemCard flexContainer');
+  projectItem.setAttribute('id', `project${project.id}`)
 
-  const projectName = document.createElement('span');
-  projectName.setAttribute('class', 'projectBtn');
+  const projectName = document.createElement('p');
+  projectName.setAttribute('class', 'textFormat');
   projectName.textContent = project.name;
 
   const editIcon = document.createElement('i');
-  editIcon.setAttribute('class', 'fas fa-edit');
+  editIcon.setAttribute('class', 'editProject projectBtn fas fa-edit');
+  editIcon.setAttribute('id', `editProject${project.id}`)
 
   const deleteIcon = document.createElement('i');
-  deleteIcon.setAttribute('class', 'far fa-trash-alt');
-
-  const editProject = document.createElement('span');
-  editProject.setAttribute('class', 'editProject projectBtn');
-  editProject.appendChild(editIcon);
-
-  const deleteProject = document.createElement('span');
-  deleteProject.setAttribute('class', 'deleteProject projectBtn');
-  deleteProject.appendChild(deleteIcon);
+  deleteIcon.setAttribute('class', 'deleteProject projectBtn far fa-trash-alt');
+  deleteIcon.setAttribute('id', `deleteProject${project.id}`)
 
   projectItem.appendChild(projectName);
-  projectItem.appendChild(editProject);
-  projectItem.appendChild(deleteProject);
+  projectItem.appendChild(editIcon);
+  projectItem.appendChild(deleteIcon);
 
   return projectItem;
 };

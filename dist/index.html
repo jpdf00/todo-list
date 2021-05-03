@@ -22,7 +22,7 @@
         <div class="modal" id="projectFormModal" hidden>
           <div class="modalContent">
             <form class="flexContainer">
-              <input type="text" class="projectInput" placeholder="Enter project name..." id="projectName" autofocus="true">
+              <input type="text" class="inputText" placeholder="Enter project name..." id="projectName" autofocus="true">
               <button type="button" class="btn btnSaveNew" id="saveProject">
                 <i class="fas fa-save"></i>
               </button>
@@ -47,39 +47,58 @@
         <div class="modal" id="taskFormModal" hidden>
           <div class="modalContent">
             <form class="flexContainer">
-              <label for="taskName" class="form-label">Task</label>
-              <input type="text" class="form-control" id="taskName">
+              <div class="flexColumn columnSize">
+                <input type="text" class="inputText" id="taskName" placeholder="Enter a Name for your task...">
+                <input type="text" class="inputText" id="taskDescription" placeholder="Enter a Description for your task...">
+                <div class="flexContainer">
+                  <label for="taskPriority" class="inputLabel">Priority</label>
+                  <select class="inputText inputBorder" aria-label="Default select example" id="taskPriority">
+                    <option value="Low">Low</option>
+                    <option value="Normal" selected>Normal</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
 
-              <label for="taskDescription" class="form-label">Description</label>
-              <input type="text" class="form-control" id="taskDescription">
+                  <label for="taskProject" class="inputLabel">Project</label>
+                  <select class="inputText inputBorder" aria-label="Default select example" id="taskProject">
+                    <option selected>Default</option>
+                  </select>
 
-              <label for="taskPriority" class="form-label">Priority</label>
-              <select class="form-select" aria-label="Default select example" id="taskPriority">
-                <option value="Low">Low</option>
-                <option value="Normal" selected>Normal</option>
-                <option value="Urgent">Urgent</option>
-              </select>
-
-              <label for="taskProject" class="form-label">Project</label>
-              <select class="form-select" aria-label="Default select example" id="taskProject">
-                <option selected>Default</option>
-              </select>
-
-              <label for="taskDueDate" class="form-label">Due date</label>
-              <input type="date" class="form-control" id="taskDueDate">
-
-              <button type="button" class="btn btnSaveNew" data-bs-dismiss="modal" id="saveTask">
-                <i class="fas fa-save"></i>
-              </button>
-              <button type="button" class="btn btnClose" id="btnCloseTask">
-                <i class="fas fa-times-circle"></i>
-              </button>
+                  <label for="taskDueDate" class="inputLabel">Due Date</label>
+                  <input type="date" class="inputText inputBorder" id="taskDueDate">
+                </div>
+              </div>
+              <div class="flexColumn">
+                <button type="button" class="btn btnClose" id="btnCloseTask">
+                  <i class="fas fa-times-circle"></i>
+                </button>
+                <button type="button" class="btn btnSaveNew" data-bs-dismiss="modal" id="saveTask">
+                  <i class="fas fa-save"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>
-      </div>
-        <div id="tasksContent" class"container">
-
+        <div id="tasksContent" class="container">
+          <div class="itemCard flexColumn">
+            <div class="flexContainer">
+              <h2 class="title">Task</h2>
+              <p class="dateFormat">01/01/2021</p>
+              <span class="alignDown projectBtn"><i class="fas fa-angle-double-down showDetail" id="showDetail"></i></span>
+            </div>
+            <div class="taskDetail" id="taskDetail" hidden>
+              <div class="flexContainer">
+                <div class="flexContainer detailStyle detailSize">
+                  <p class="textFormat marginRight">Description</p>
+                  <p class="textFormat marginRight">Project</p>
+                  <p class="textFormat marginRight">Priority</p>
+                </div>
+                <div class="flexContainer detailStyle">
+                  <i class="editTask projectBtn marginRight fas fa-edit"></i>
+                  <i class="deleteTask projectBtn marginRight far fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

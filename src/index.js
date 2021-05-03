@@ -1,9 +1,11 @@
-import { populateStorage } from './projectsLogic.js';
-import { saveNewProject, drawProjects } from './projectsHTML';
+import { populateStorage } from './utilities.js';
+import { saveNewProject, drawProjects } from './projectsHTML.js';
 
 // Populate localStorage on first use
-populateStorage('projects'); /* Project */
-populateStorage('tasks'); /* Task */
+populateStorage('projects');
+populateStorage('tasks');
+populateStorage('projectCount');
+populateStorage('taskCount');
 
 // Draw the page on load
 drawProjects(); /* Project */
@@ -24,14 +26,22 @@ const btnCloseTask = document.querySelector("#btnCloseTask"); /* Task */
 const saveProject = document.querySelector("#saveProject"); /* Project */
 const saveTask = document.querySelector("#saveTask"); /* Task */
 
+// Get the button that shows task details
+const showDetail = document.querySelector("#showDetail"); /* Task */
+
+// Get the detail container
+const taskDetail = document.querySelector("#taskDetail"); /* Task */
+
 // Show project form
 btnNewProject.addEventListener('click', () => {
   projectFormModal.removeAttribute('hidden');
+  saveProject.setAttribute('value', 'new');
 });
 
 // Show task form
 btnNewTask.addEventListener('click', () => {
   taskFormModal.removeAttribute('hidden');
+  saveTask.setAttribute('value', 'new');
 });
 
 // Hide project form (for close button)
@@ -56,8 +66,20 @@ window.onclick = function(event) {
   }
 }
 
+// Toggle task detail
+showDetail.addEventListener('click', () => {
+  if (taskDetail.hasAttribute("hidden")){
+    taskDetail.removeAttribute('hidden');
+    showDetail.setAttribute('class', 'fas fa-angle-double-up');
+  } else {
+    taskDetail.setAttribute('hidden', 'true');
+    showDetail.setAttribute('class', 'fas fa-angle-double-down');
+  }
+});
+
 
 saveProject.addEventListener('click', () => {
   saveNewProject();
   projectFormModal.setAttribute('hidden', 'true');
+  saveProject.value = '';
 });

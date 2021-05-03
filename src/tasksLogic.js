@@ -1,6 +1,8 @@
-const Project = (id, name) => ({ id, name });
+const Task = (name, description, priority, project, dueDate, completed) => ({
+  name, description, priority, project, dueDate, completed,
+});
 
-function addProjectToProjects(name) {
+function addTaskToTasks(name) {
   const projects = JSON.parse(localStorage.getItem('projects'))
   let id = JSON.parse(localStorage.getItem('projectCount'))
   id += 1;
@@ -10,5 +12,3 @@ function addProjectToProjects(name) {
   localStorage.setItem('projects', JSON.stringify(projects));
   return project;
 };
-
-export { Project, addProjectToProjects };
