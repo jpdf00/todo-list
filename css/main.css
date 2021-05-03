@@ -138,8 +138,12 @@ p, h2 {
   margin: auto 5px 0 auto;
   vertical-align: bottom; }
 
+.alignUp {
+  margin: 0 5px auto auto;
+  vertical-align: bottom; }
+
 .dateFormat {
-  margin: auto 5px auto auto;
+  margin: auto auto auto auto;
   color: #444;
   font-size: 40px;
   font-weight: bold; }
