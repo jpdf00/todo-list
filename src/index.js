@@ -1,5 +1,6 @@
-import { populateStorage } from './utilities.js';
+import { populateStorage } from './utilities.js'; { saveNewTask, drawTasks }
 import { saveNewProject, drawProjects } from './projectsHTML.js';
+import { saveNewTask, drawTasks } from './tasksHTML.js';
 
 // Populate localStorage on first use
 populateStorage('projects');
@@ -9,6 +10,7 @@ populateStorage('taskCount');
 
 // Draw the page on load
 drawProjects(); /* Project */
+drawTasks(); /* Task */
 
 // Get the modal
 const projectFormModal = document.querySelector("#projectFormModal"); /* Project */
@@ -77,9 +79,14 @@ showDetail.addEventListener('click', () => {
   }
 });
 
-
 saveProject.addEventListener('click', () => {
   saveNewProject();
   projectFormModal.setAttribute('hidden', 'true');
   saveProject.value = '';
+});
+
+saveTask.addEventListener('click', () => {
+  saveNewTask();
+  projectFormTask.setAttribute('hidden', 'true');
+  saveTask.value = '';
 });
