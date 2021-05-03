@@ -70,10 +70,10 @@ window.onclick = function(event) {
 showDetail.addEventListener('click', () => {
   if (taskDetail.hasAttribute("hidden")){
     taskDetail.removeAttribute('hidden');
-    showDetail.setAttribute('class', 'fas fa-angle-double-up');
+    showDetail.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
   } else {
     taskDetail.setAttribute('hidden', 'true');
-    showDetail.setAttribute('class', 'fas fa-angle-double-down');
+    showDetail.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
   }
 });
 

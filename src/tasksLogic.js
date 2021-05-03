@@ -1,14 +1,16 @@
-const Task = (name, description, priority, project, dueDate, completed) => ({
+const Task = (id, name, description, priority, project, dueDate, completed = false) => ({
   name, description, priority, project, dueDate, completed,
 });
 
-function addTaskToTasks(name) {
-  const projects = JSON.parse(localStorage.getItem('projects'))
-  let id = JSON.parse(localStorage.getItem('projectCount'))
+function addTaskToTasks(name, description, priority, project, dueDate) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'))
+  let id = JSON.parse(localStorage.getItem('taskCount'))
+  const task = Project(id, name, description, priority, project, dueDate);
   id += 1;
-  const project = Project(id, name);
-  projects.push(project);
-  localStorage.setItem('projectCount', JSON.stringify(id));
-  localStorage.setItem('projects', JSON.stringify(projects));
-  return project;
+  tasks.push(project);
+  localStorage.setItem('taskCount', JSON.stringify(id));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  return task;
 };
+
+export { addTaskToTasks };
