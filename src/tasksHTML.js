@@ -15,7 +15,7 @@ const TaskHTML = (task) => {
 
   const date = document.createElement('p');
   date.setAttribute('class', 'dateFormat');
-  date.textContent = task.name;
+  date.textContent = task.dueDate.split("-").reverse().join("/");
   flexContainer1.appendChild(date);
 
   const flexColumn = document.createElement('div');

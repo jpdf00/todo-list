@@ -1,5 +1,5 @@
 const Task = (id, name, description, priority, project, dueDate, completed = false) => ({
-  name, description, priority, project, dueDate, completed,
+  id, name, description, priority, project, dueDate, completed,
 });
 
 function addTaskToTasks(name, description, priority, project, dueDate) {
@@ -7,7 +7,7 @@ function addTaskToTasks(name, description, priority, project, dueDate) {
   let id = JSON.parse(localStorage.getItem('taskCount'))
   const task = Task(id, name, description, priority, project, dueDate);
   id += 1;
-  tasks.push(project);
+  tasks.push(task);
   localStorage.setItem('taskCount', JSON.stringify(id));
   localStorage.setItem('tasks', JSON.stringify(tasks));
   return task;

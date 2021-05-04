@@ -29,10 +29,7 @@ const saveProject = document.querySelector("#saveProject"); /* Project */
 const saveTask = document.querySelector("#saveTask"); /* Task */
 
 // Get the button that shows task details
-const showDetail = document.querySelector("#showDetail"); /* Task */
-
-// Get the detail container
-const taskDetail = document.querySelector("#taskDetail"); /* Task */
+const showDetailAll = document.querySelectorAll(".showDetail"); /* Task */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -68,25 +65,31 @@ window.onclick = function(event) {
   }
 }
 
-// Toggle task detail
-showDetail.addEventListener('click', () => {
-  if (taskDetail.hasAttribute("hidden")){
-    taskDetail.removeAttribute('hidden');
-    showDetail.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
-  } else {
-    taskDetail.setAttribute('hidden', 'true');
-    showDetail.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
-  }
-});
-
+//Save new project
 saveProject.addEventListener('click', () => {
   saveNewProject();
   projectFormModal.setAttribute('hidden', 'true');
   saveProject.value = '';
 });
 
+//Save new task
 saveTask.addEventListener('click', () => {
   saveNewTask();
-  projectFormTask.setAttribute('hidden', 'true');
+  taskFormModal.setAttribute('hidden', 'true');
   saveTask.value = '';
+});
+
+// Toggle task detail
+showDetailAll.forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = parseInt(button.id.match(/\d+/gm), 10);
+    const taskDetail = document.querySelector(`#taskDetail${id}`); /* Task */
+    if (taskDetail.hasAttribute("hidden")){
+      taskDetail.removeAttribute('hidden');
+      button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
+    } else {
+      taskDetail.setAttribute('hidden', 'true');
+      button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
+    }
+  });
 });
