@@ -13,4 +13,14 @@ function addTaskToTasks(name, description, priority, project, dueDate) {
   return task;
 };
 
-export { addTaskToTasks };
+function toggleTaskCompletion(id) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'))
+  const i = tasks.findIndex((item) => {
+    return item.id === id
+  })
+  tasks[i].completed = (tasks[i].completed) ? false:true;
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  return tasks[i].completed;
+}
+
+export { addTaskToTasks, toggleTaskCompletion };

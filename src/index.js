@@ -1,5 +1,6 @@
 import { populateStorage } from './utilities.js'; { saveNewTask, drawTasks }
 import { saveNewProject, drawProjects } from './projectsHTML.js';
+import { toggleTaskCompletion } from './tasksLogic.js';
 import { saveNewTask, drawTasks } from './tasksHTML.js';
 
 // Populate localStorage on first use
@@ -9,8 +10,8 @@ populateStorage('projectCount');
 populateStorage('taskCount');
 
 // Draw the page on load
-drawProjects(); /* Project */
 drawTasks(); /* Task */
+drawProjects(); /* Project */
 
 // Get the modal
 const projectFormModal = document.querySelector("#projectFormModal"); /* Project */
@@ -28,8 +29,14 @@ const btnCloseTask = document.querySelector("#btnCloseTask"); /* Task */
 const saveProject = document.querySelector("#saveProject"); /* Project */
 const saveTask = document.querySelector("#saveTask"); /* Task */
 
+// Get the projects that to shows tasks by project
+const showDetailAll = document.querySelectorAll(".showDetail"); /* Task */
+
 // Get the button that shows task details
 const showDetailAll = document.querySelectorAll(".showDetail"); /* Task */
+
+// Get the button that toggle the task completion
+const completeTaskAll = document.querySelectorAll(".completeTask"); /* Task */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -83,13 +90,29 @@ saveTask.addEventListener('click', () => {
 showDetailAll.forEach((button) => {
   button.addEventListener('click', () => {
     const id = parseInt(button.id.match(/\d+/gm), 10);
-    const taskDetail = document.querySelector(`#taskDetail${id}`); /* Task */
+    const taskDetail = document.querySelector(`#taskDetail${id}`);
     if (taskDetail.hasAttribute("hidden")){
       taskDetail.removeAttribute('hidden');
       button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
     } else {
       taskDetail.setAttribute('hidden', 'true');
       button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
+    }
+  });
+});
+
+// Toggle Completion
+completeTaskAll.forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = parseInt(button.id.match(/\d+/gm), 10);
+    const taskHTML = document.querySelector(`#task${id}`).firstChild;
+    const completed = toggleTaskCompletion(id);
+    if (completed){
+      button.setAttribute('class', 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask');
+      taskHTML.setAttribute('class', 'flexContainer  disabled');
+    } else {
+      button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
+      taskHTML.setAttribute('class', 'flexContainer  enabled');
     }
   });
 });

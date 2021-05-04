@@ -98,7 +98,6 @@ p, h2 {
 .title {
   padding: 5px;
   text-align: center;
-  color: #444;
   margin: 0;
   font-size: 40px;
 }
@@ -159,7 +158,6 @@ p, h2 {
 
 .dateFormat {
   margin: auto auto auto auto;
-  color: #444;
   font-size: 40px;
   font-weight: bold;
 }
@@ -180,4 +178,26 @@ p, h2 {
 
 .marginRight {
   margin-right: 20px;
+}
+
+.taksPending {
+  color: #d60000;
+}
+
+.taksCompleted {
+  color: #009400;
+}
+
+.disabled {
+  text-decoration: overline;
+  color: #aaa;
+}
+
+.enabled {
+  color: #444;
+}
+
+.project {
+  cursor: pointer;
+  font-weight: bolder;
 }

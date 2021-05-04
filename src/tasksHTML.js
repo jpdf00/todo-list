@@ -6,7 +6,8 @@ const TaskHTML = (task) => {
   taskItem.setAttribute('id', `task${task.id}`)
 
   const flexContainer1 = document.createElement('div');
-  flexContainer1.setAttribute('class', 'flexContainer');
+  const toggleContainer = (task.completed) ? 'flexContainer  disabled':'flexContainer  enabled'
+  flexContainer1.setAttribute('class', `${toggleContainer}`);
 
   const name = document.createElement('h2');
   name.setAttribute('class', 'title');
@@ -22,7 +23,8 @@ const TaskHTML = (task) => {
   flexColumn.setAttribute('class', 'flexColumn');
 
   const completeTask = document.createElement('i');
-  completeTask.setAttribute('class', 'alignUp projectBtn far fa-calendar completeTask');
+  const completeClass = (task.completed) ? 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask':'taksPending alignUp projectBtn far fa-calendar completeTask'
+  completeTask.setAttribute('class', `${completeClass}`);
   completeTask.setAttribute('id', `completeTask${task.id}`)
   flexColumn.appendChild(completeTask);
 
