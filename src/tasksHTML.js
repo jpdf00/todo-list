@@ -107,8 +107,8 @@ function saveNewTask() {
   appendTaskToTasks(task);
   taskName.value = '';
   taskDescription.value = '';
-  taskPriority.value = '';
-  taskProject.value = '';
+  taskPriority.value = 'Low';
+  taskProject.value = 'Default Project';
   taskDueDate.value = '';
 }
 
