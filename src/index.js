@@ -30,7 +30,7 @@ const saveProject = document.querySelector("#saveProject"); /* Project */
 const saveTask = document.querySelector("#saveTask"); /* Task */
 
 // Get the projects that to shows tasks by project
-const showDetailAll = document.querySelectorAll(".showDetail"); /* Task */
+const projectsAll = document.querySelectorAll(".projectSort"); /* Task */
 
 // Get the button that shows task details
 const showDetailAll = document.querySelectorAll(".showDetail"); /* Task */
@@ -113,6 +113,22 @@ completeTaskAll.forEach((button) => {
     } else {
       button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
       taskHTML.setAttribute('class', 'flexContainer  enabled');
+    }
+  });
+});
+
+// Sort tasks by project
+projectsAll.forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = parseInt(button.id.match(/\d+/gm), 10);
+    const tasksContent = document.querySelector('#tasksContent').children;
+    for (let i = 0; i < tasksContent.length; i += 1) {
+      const taskProject = tasksContent[i].lastElementChild.firstElementChild.firstElementChild.lastElementChild
+      if (button.textContent === taskProject.textContent){
+        tasksContent[i].setAttribute('class', 'itemCard flexColumn');
+      } else {
+        tasksContent[i].setAttribute('class', 'itemCard displayNone');
+      }
     }
   });
 });

@@ -6,7 +6,7 @@ const ProjectHTML = (project) => {
   projectItem.setAttribute('id', `project${project.id}`)
 
   const projectName = document.createElement('p');
-  projectName.setAttribute('class', 'textFormat project');
+  projectName.setAttribute('class', 'textFormat project projectSort');
   projectName.setAttribute('id', `project${project.id}`)
   projectName.textContent = project.name;
 

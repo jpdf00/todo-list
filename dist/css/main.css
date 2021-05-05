@@ -16,6 +16,9 @@ p, h2 {
   display: flex;
   flex-direction: column; }
 
+.displayNone {
+  display: none; }
+
 .columnSize {
   width: 95%;
   margin-right: auto; }
