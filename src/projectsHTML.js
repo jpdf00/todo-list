@@ -1,22 +1,26 @@
 import { addProjectToProjects } from './projectsLogic.js';
 
 const ProjectHTML = (project) => {
+  const currentProject = JSON.parse(localStorage.getItem('currentProject'));
+
+  const projectItemClass = (project.name === currentProject) ? 'itemCardReversed flexContainer' : 'itemCard flexContainer'
+
   const projectItem = document.createElement('div');
-  projectItem.setAttribute('class', 'itemCard flexContainer');
-  projectItem.setAttribute('id', `project${project.id}`)
+  projectItem.setAttribute('class', `${projectItemClass}`);
+  projectItem.setAttribute('id', `project${project.id}`);
 
   const projectName = document.createElement('p');
-  projectName.setAttribute('class', 'textFormat project projectSort');
-  projectName.setAttribute('id', `project${project.id}`)
+  projectName.setAttribute('class', 'project projectSort');
+  projectName.setAttribute('id', `project${project.id}`);
   projectName.textContent = project.name;
 
   const editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'editProject projectBtn fas fa-edit');
-  editIcon.setAttribute('id', `editProject${project.id}`)
+  editIcon.setAttribute('id', `editProject${project.id}`);
 
   const deleteIcon = document.createElement('i');
   deleteIcon.setAttribute('class', 'deleteProject projectBtn far fa-trash-alt');
-  deleteIcon.setAttribute('id', `deleteProject${project.id}`)
+  deleteIcon.setAttribute('id', `deleteProject${project.id}`);
 
   projectItem.appendChild(projectName);
   projectItem.appendChild(editIcon);
@@ -43,15 +47,15 @@ function saveNewProject() {
   const projectName = document.querySelector('#projectName');
   const project = addProjectToProjects(projectName.value);
   appendProjectToProjects(project);
-  appendProjectToTaskSelect(project.name)
-  projectName.value = "";
+  appendProjectToTaskSelect(project.name);
+  projectName.value = '';
 }
 
 function drawProjects() {
   const projects = JSON.parse(localStorage.getItem('projects'));
   for (let i = 0; i < projects.length; i += 1) {
-    appendProjectToProjects(projects[i])
-    appendProjectToTaskSelect(projects[i].name)
+    appendProjectToProjects(projects[i]);
+    appendProjectToTaskSelect(projects[i].name);
   }
 }
 

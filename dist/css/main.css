@@ -128,11 +128,19 @@ p, h2 {
 .itemCard {
   margin-bottom: 10px;
   padding: 8px;
-  box-shadow: 2px 2px 5px #aaa; }
+  box-shadow: 2px 2px 5px #aaa;
+  color: #666;
+  font-size: 20px; }
+
+.itemCardReversed {
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #aaa;
+  color: #fff;
+  background-color: #666;
+  font-size: 20px; }
 
 .projectBtn {
-  color: #444;
-  font-size: 20px;
   margin-left: auto;
   cursor: pointer; }
 
@@ -156,10 +164,6 @@ p, h2 {
 .detailSize {
   width: 95%; }
 
-.textFormat {
-  color: #444;
-  font-size: 20px; }
-
 .marginRight {
   margin-right: 20px; }
 
@@ -172,9 +176,6 @@ p, h2 {
 .disabled {
   text-decoration: overline;
   color: #aaa; }
-
-.enabled {
-  color: #444; }
 
 .project {
   cursor: pointer;

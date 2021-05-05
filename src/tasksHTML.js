@@ -1,12 +1,16 @@
 import { addTaskToTasks } from './tasksLogic.js';
 
 const TaskHTML = (task) => {
+  const currentProject = JSON.parse(localStorage.getItem('currentProject'));
+
+  const taskItemClass = (task.project === currentProject || !currentProject) ? 'itemCard flexColumn' : 'itemCard displayNone'
+
   const taskItem = document.createElement('div');
-  taskItem.setAttribute('class', 'itemCard flexColumn');
-  taskItem.setAttribute('id', `task${task.id}`)
+  taskItem.setAttribute('class', `${taskItemClass}`);
+  taskItem.setAttribute('id', `task${task.id}`);
 
   const flexContainer1 = document.createElement('div');
-  const toggleContainer = (task.completed) ? 'flexContainer  disabled':'flexContainer  enabled'
+  const toggleContainer = (task.completed) ? 'flexContainer  disabled' : 'flexContainer';
   flexContainer1.setAttribute('class', `${toggleContainer}`);
 
   const name = document.createElement('h2');
@@ -16,21 +20,21 @@ const TaskHTML = (task) => {
 
   const date = document.createElement('p');
   date.setAttribute('class', 'dateFormat');
-  date.textContent = task.dueDate.split("-").reverse().join("/");
+  date.textContent = task.dueDate.split('-').reverse().join('/');
   flexContainer1.appendChild(date);
 
   const flexColumn = document.createElement('div');
   flexColumn.setAttribute('class', 'flexColumn');
 
   const completeTask = document.createElement('i');
-  const completeClass = (task.completed) ? 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask':'taksPending alignUp projectBtn far fa-calendar completeTask'
+  const completeClass = (task.completed) ? 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask' : 'taksPending alignUp projectBtn far fa-calendar completeTask';
   completeTask.setAttribute('class', `${completeClass}`);
-  completeTask.setAttribute('id', `completeTask${task.id}`)
+  completeTask.setAttribute('id', `completeTask${task.id}`);
   flexColumn.appendChild(completeTask);
 
   const showDetail = document.createElement('i');
   showDetail.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
-  showDetail.setAttribute('id', `showDetail${task.id}`)
+  showDetail.setAttribute('id', `showDetail${task.id}`);
   flexColumn.appendChild(showDetail);
 
   flexContainer1.appendChild(flexColumn);
@@ -39,8 +43,8 @@ const TaskHTML = (task) => {
 
   const taskDetail = document.createElement('div');
   taskDetail.setAttribute('class', 'taskDetail');
-  taskDetail.setAttribute('id', `taskDetail${task.id}`)
-  taskDetail.setAttribute('hidden', 'true')
+  taskDetail.setAttribute('id', `taskDetail${task.id}`);
+  taskDetail.setAttribute('hidden', 'true');
 
   const flexContainer2 = document.createElement('div');
   flexContainer2.setAttribute('class', 'flexContainer');
@@ -49,17 +53,17 @@ const TaskHTML = (task) => {
   detailStyle1.setAttribute('class', 'flexContainer detailStyle detailSize');
 
   const description = document.createElement('p');
-  description.setAttribute('class', 'textFormat marginRight');
+  description.setAttribute('class', 'marginRight');
   description.textContent = task.description;
   detailStyle1.appendChild(description);
 
   const priority = document.createElement('p');
-  priority.setAttribute('class', 'textFormat marginRight');
+  priority.setAttribute('class', 'marginRight');
   priority.textContent = task.priority;
   detailStyle1.appendChild(priority);
 
   const project = document.createElement('p');
-  project.setAttribute('class', 'textFormat marginRight');
+  project.setAttribute('class', 'marginRight');
   project.textContent = task.project;
   detailStyle1.appendChild(project);
 
@@ -70,12 +74,12 @@ const TaskHTML = (task) => {
 
   const editTask = document.createElement('i');
   editTask.setAttribute('class', 'editTask projectBtn marginRight fas fa-edit');
-  editTask.setAttribute('id', `editTask${task.id}`)
+  editTask.setAttribute('id', `editTask${task.id}`);
   detailStyle2.appendChild(editTask);
 
   const deleteTask = document.createElement('i');
   deleteTask.setAttribute('class', 'deleteTask projectBtn marginRight far fa-trash-alt');
-  deleteTask.setAttribute('id', `deleteTask${task.id}`)
+  deleteTask.setAttribute('id', `deleteTask${task.id}`);
   detailStyle2.appendChild(deleteTask);
 
   flexContainer2.appendChild(detailStyle2);
@@ -111,7 +115,7 @@ function saveNewTask() {
 function drawTasks() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   for (let i = 0; i < tasks.length; i += 1) {
-    appendTaskToTasks(tasks[i])
+    appendTaskToTasks(tasks[i]);
   }
 }
 

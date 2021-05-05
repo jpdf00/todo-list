@@ -1,16 +1,29 @@
 import { Project } from './projectsLogic.js';
 
-function populateStorage(title){
-  if (localStorage.getItem(`${title}`) === null){
+function populateStorage(title) {
+  if (localStorage.getItem(`${title}`) === null) {
     let item;
-    if (title === 'projects') {
-      item = [Project(0, 'Default Project')];
-    } else if (title === 'tasks') {
-      item = [];
-    } else if (title.match(/Count/g).toString() === 'Count') {
-      item = 0
+
+    switch (title) {
+      case 'projects':
+        item = [Project(0, 'Default Project')];
+        break;
+      case 'tasks':
+        item = [];
+        break;
+      case 'projectCount':
+      case 'taskCount':
+        item = 0;
+        break;
+      case 'currentProject':
+        item = '';
+        break;
+      default:
+        item = null;
+        break;
     }
-    localStorage.setItem(`${title}`, JSON.stringify(item))
+
+    localStorage.setItem(`${title}`, JSON.stringify(item));
   }
 }
 
