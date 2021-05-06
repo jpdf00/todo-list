@@ -60,11 +60,13 @@ btnNewTask.addEventListener('click', () => {
 // Hide project form (for close button)
 btnCloseProject.addEventListener('click', () => {
   projectFormModal.setAttribute('hidden', 'true');
+  saveProject.value = '';
 });
 
 // Hide task form (for close button)
 btnCloseTask.addEventListener('click', () => {
   taskFormModal.setAttribute('hidden', 'true');
+  saveTask.value = '';
 });
 
 // Hide form (for background)
@@ -72,10 +74,12 @@ window.onclick = (event) => {
   // Project form
   if (event.target === projectFormModal) {
     projectFormModal.setAttribute('hidden', 'true');
+    saveProject.value = '';
   }
   // Task Form
   if (event.target === taskFormModal) {
     taskFormModal.setAttribute('hidden', 'true');
+    saveTask.value = '';
   }
 };
 
