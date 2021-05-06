@@ -1,4 +1,4 @@
-import { addTaskToTasks } from './tasksLogic.js';
+import { addTaskToTasks, retrieveTask, editTask } from './tasksLogic.js';
 
 const TaskHTML = (task) => {
   const currentProject = JSON.parse(localStorage.getItem('currentProject'));
@@ -15,11 +15,13 @@ const TaskHTML = (task) => {
 
   const name = document.createElement('h2');
   name.setAttribute('class', 'title');
+  name.setAttribute('id', `taskName${task.id}`);
   name.textContent = task.name;
   flexContainer1.appendChild(name);
 
   const date = document.createElement('p');
   date.setAttribute('class', 'dateFormat');
+  date.setAttribute('id', `taskDueDate${task.id}`);
   date.textContent = task.dueDate.split('-').reverse().join('/');
   flexContainer1.appendChild(date);
 
@@ -54,16 +56,19 @@ const TaskHTML = (task) => {
 
   const description = document.createElement('p');
   description.setAttribute('class', 'marginRight');
+  description.setAttribute('id', `taskDescription${task.id}`);
   description.textContent = task.description;
   detailStyle1.appendChild(description);
 
   const priority = document.createElement('p');
   priority.setAttribute('class', 'marginRight');
+  priority.setAttribute('id', `taskPriority${task.id}`);
   priority.textContent = task.priority;
   detailStyle1.appendChild(priority);
 
   const project = document.createElement('p');
   project.setAttribute('class', 'marginRight');
+  project.setAttribute('id', `taskProject${task.id}`);
   project.textContent = task.project;
   detailStyle1.appendChild(project);
 
@@ -112,6 +117,44 @@ function saveNewTask() {
   taskDueDate.value = '';
 }
 
+function callEditForm(id) {
+  const taskName = document.querySelector('#taskName');
+  const taskDescription = document.querySelector('#taskDescription');
+  const taskPriority = document.querySelector('#taskPriority');
+  const taskProject = document.querySelector('#taskProject');
+  const taskDueDate = document.querySelector('#taskDueDate');
+  const task = retrieveTask(id);
+  taskName.value = task.name;
+  taskDescription.value = task.description;
+  taskPriority.value = task.priority;
+  taskProject.value = task.project;
+  taskDueDate.value = task.dueDate;
+}
+
+function saveEditedTask(id) {
+  const taskName = document.querySelector('#taskName');
+  const taskDescription = document.querySelector('#taskDescription');
+  const taskPriority = document.querySelector('#taskPriority');
+  const taskProject = document.querySelector('#taskProject');
+  const taskDueDate = document.querySelector('#taskDueDate');
+  const taskNameId = document.querySelector(`#taskName${id}`);
+  const taskDescriptionId = document.querySelector(`#taskDescription${id}`);
+  const taskPriorityId = document.querySelector(`#taskPriority${id}`);
+  const taskProjectId = document.querySelector(`#taskProject${id}`);
+  const taskDueDateId = document.querySelector(`#taskDueDate${id}`);
+  const task = editTask(id, taskName.value, taskDescription.value, taskPriority.value, taskProject.value, taskDueDate.value);;
+  taskNameId.textContent = taskName.value;
+  taskDescriptionId.textContent = taskDescription.value;
+  taskPriorityId.textContent = taskPriority.value;
+  taskProjectId.textContent = taskProject.value;
+  taskDueDateId.textContent = taskDueDate.value.split('-').reverse().join('/');
+  taskName.value = '';
+  taskDescription.value = '';
+  taskPriority.value = 'Low';
+  taskProject.value = 'Default Project';
+  taskDueDate.value = '';
+}
+
 function drawTasks() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   for (let i = 0; i < tasks.length; i += 1) {
@@ -119,4 +162,4 @@ function drawTasks() {
   }
 }
 
-export { saveNewTask, drawTasks };
+export { saveNewTask, drawTasks, callEditForm, saveEditedTask };

@@ -1,7 +1,7 @@
 import { populateStorage } from './utilities.js';
 import { saveNewProject, drawProjects } from './projectsHTML.js';
-import { toggleTaskCompletion } from './tasksLogic.js';
-import { saveNewTask, drawTasks } from './tasksHTML.js';
+import { toggleTaskCompletion, } from './tasksLogic.js';
+import { saveNewTask, drawTasks, callEditForm, saveEditedTask } from './tasksHTML.js';
 
 // Populate localStorage on first use
 populateStorage('projects');
@@ -38,6 +38,9 @@ const showDetailAll = document.querySelectorAll('.showDetail'); /* Task */
 
 // Get the button that toggle the task completion
 const completeTaskAll = document.querySelectorAll('.completeTask'); /* Task */
+
+// Get the button that toggle the task completion
+const editTaskAll = document.querySelectorAll('.editTask'); /* Task */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -82,7 +85,11 @@ saveProject.addEventListener('click', () => {
 
 // Save new task
 saveTask.addEventListener('click', () => {
-  saveNewTask();
+  if (saveTask.value === 'new'){
+    saveNewTask();
+  } else {
+    saveEditedTask(parseInt(saveTask.value, 10))
+  }
   taskFormModal.setAttribute('hidden', 'true');
   saveTask.value = '';
 });
@@ -124,21 +131,17 @@ projectsAll.forEach((button) => {
     const tasksContent = document.querySelector('#tasksContent').children;
     if (button.parentElement.attributes[0].value === 'itemCardReversed flexContainer') {
       button.parentElement.attributes[0].value = 'itemCard flexContainer';
-
       for (let i = 0; i < tasksContent.length; i += 1) {
         tasksContent[i].setAttribute('class', 'itemCard flexColumn');
       }
-
       localStorage.setItem('currentProject', JSON.stringify(''));
     } else {
       button.parentElement.attributes[0].value = 'itemCardReversed flexContainer';
-
       projectsAll.forEach((item) => {
         if (item !== button) {
           item.parentElement.attributes[0].value = 'itemCard flexContainer';
         }
       });
-
       for (let i = 0; i < tasksContent.length; i += 1) {
         const taskProject = tasksContent[i].lastElementChild.firstElementChild.firstElementChild.lastElementChild;
         if (button.textContent === taskProject.textContent) {
@@ -147,8 +150,17 @@ projectsAll.forEach((button) => {
           tasksContent[i].setAttribute('class', 'itemCard displayNone');
         }
       }
-
       localStorage.setItem('currentProject', JSON.stringify(button.textContent));
     }
+  });
+});
+
+// Edit task
+editTaskAll.forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = parseInt(button.id.match(/\d+/gm), 10);
+    callEditForm(id);
+    taskFormModal.removeAttribute('hidden');
+    saveTask.setAttribute('value', `${id}`);
   });
 });
