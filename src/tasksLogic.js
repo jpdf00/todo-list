@@ -24,7 +24,6 @@ function toggleTaskCompletion(id) {
 function retrieveTask(id) {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   const i = tasks.findIndex((item) => item.id === id);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
   return tasks[i];
 }
 
@@ -40,4 +39,12 @@ function editTask(id, name, description, priority, project, dueDate ) {
   return tasks[i];
 }
 
-export { addTaskToTasks, toggleTaskCompletion, retrieveTask, editTask };
+function deleteTask(id) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  const i = tasks.findIndex((item) => item.id === id);
+  tasks.splice(i, 1);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  return tasks[i];
+}
+
+export { addTaskToTasks, toggleTaskCompletion, retrieveTask, editTask, deleteTask };

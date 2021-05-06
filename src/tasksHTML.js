@@ -1,4 +1,4 @@
-import { addTaskToTasks, retrieveTask, editTask } from './tasksLogic.js';
+import { addTaskToTasks, retrieveTask, editTask, deleteTask } from './tasksLogic.js';
 
 const TaskHTML = (task) => {
   const currentProject = JSON.parse(localStorage.getItem('currentProject'));
@@ -155,6 +155,12 @@ function saveEditedTask(id) {
   taskDueDate.value = '';
 }
 
+function removeTaskFromTasks(id) {
+  const taskItem = document.querySelector(`#task${id}`);
+  deleteTask(id);
+  taskItem.parentElement.removeChild(taskItem);
+}
+
 function drawTasks() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   for (let i = 0; i < tasks.length; i += 1) {
@@ -162,4 +168,4 @@ function drawTasks() {
   }
 }
 
-export { saveNewTask, drawTasks, callEditForm, saveEditedTask };
+export { saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks };

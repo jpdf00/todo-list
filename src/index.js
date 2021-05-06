@@ -1,7 +1,7 @@
 import { populateStorage } from './utilities.js';
 import { saveNewProject, drawProjects } from './projectsHTML.js';
 import { toggleTaskCompletion, } from './tasksLogic.js';
-import { saveNewTask, drawTasks, callEditForm, saveEditedTask } from './tasksHTML.js';
+import { saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks } from './tasksHTML.js';
 
 // Populate localStorage on first use
 populateStorage('projects');
@@ -39,8 +39,11 @@ const showDetailAll = document.querySelectorAll('.showDetail'); /* Task */
 // Get the button that toggle the task completion
 const completeTaskAll = document.querySelectorAll('.completeTask'); /* Task */
 
-// Get the button that toggle the task completion
+// Get the button that edit the task
 const editTaskAll = document.querySelectorAll('.editTask'); /* Task */
+
+// Get the button that delete the task
+const deleteTaskAll = document.querySelectorAll('.deleteTask'); /* Task */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -162,5 +165,13 @@ editTaskAll.forEach((button) => {
     callEditForm(id);
     taskFormModal.removeAttribute('hidden');
     saveTask.setAttribute('value', `${id}`);
+  });
+});
+
+// Delete task
+deleteTaskAll.forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = parseInt(button.id.match(/\d+/gm), 10);
+    removeTaskFromTasks(id);
   });
 });
