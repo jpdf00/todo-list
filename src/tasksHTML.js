@@ -1,9 +1,11 @@
-import { addTaskToTasks, retrieveTask, editTask, deleteTask } from './tasksLogic.js';
+import {
+  addTaskToTasks, retrieveTask, editTask, deleteTask,
+} from './tasksLogic.js';
 
 const TaskHTML = (task) => {
   const currentProject = JSON.parse(localStorage.getItem('currentProject'));
 
-  const taskItemClass = (task.project === currentProject || !currentProject) ? 'itemCard flexColumn' : 'itemCard displayNone'
+  const taskItemClass = (task.project === currentProject || !currentProject) ? 'itemCard flexColumn' : 'itemCard displayNone';
 
   const taskItem = document.createElement('div');
   taskItem.setAttribute('class', `${taskItemClass}`);
@@ -142,7 +144,7 @@ function saveEditedTask(id) {
   const taskPriorityId = document.querySelector(`#taskPriority${id}`);
   const taskProjectId = document.querySelector(`#taskProject${id}`);
   const taskDueDateId = document.querySelector(`#taskDueDate${id}`);
-  const task = editTask(id, taskName.value, taskDescription.value, taskPriority.value, taskProject.value, taskDueDate.value);;
+  const task = editTask(id, taskName.value, taskDescription.value, taskPriority.value, taskProject.value, taskDueDate.value);
   taskNameId.textContent = taskName.value;
   taskDescriptionId.textContent = taskDescription.value;
   taskPriorityId.textContent = taskPriority.value;
@@ -168,4 +170,6 @@ function drawTasks() {
   }
 }
 
-export { saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks };
+export {
+  saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks,
+};

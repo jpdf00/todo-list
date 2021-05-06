@@ -27,7 +27,7 @@ function retrieveTask(id) {
   return tasks[i];
 }
 
-function editTask(id, name, description, priority, project, dueDate ) {
+function editTask(id, name, description, priority, project, dueDate) {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   const i = tasks.findIndex((item) => item.id === id);
   tasks[i].name = name;
@@ -47,4 +47,6 @@ function deleteTask(id) {
   return tasks[i];
 }
 
-export { addTaskToTasks, toggleTaskCompletion, retrieveTask, editTask, deleteTask };
+export {
+  addTaskToTasks, toggleTaskCompletion, retrieveTask, editTask, deleteTask,
+};

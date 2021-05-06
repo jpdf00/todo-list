@@ -1,0 +1,78 @@
+import { toggleTaskCompletion } from './tasksLogic.js';
+import {
+  callEditForm, removeTaskFromTasks,
+} from './tasksHTML.js';
+
+// Toggle task detail
+function eventTaskToggle(button) {
+  const id = parseInt(button.id.match(/\d+/gm), 10);
+  const taskDetail = document.querySelector(`#taskDetail${id}`);
+  if (taskDetail.hasAttribute('hidden')) {
+    taskDetail.removeAttribute('hidden');
+    button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
+  } else {
+    taskDetail.setAttribute('hidden', 'true');
+    button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
+  }
+}
+
+// Toggle task completion
+function eventCompletionToggle(button) {
+  const id = parseInt(button.id.match(/\d+/gm), 10);
+  const taskHTML = document.querySelector(`#task${id}`).firstChild;
+  const completed = toggleTaskCompletion(id);
+  if (completed) {
+    button.setAttribute('class', 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask');
+    taskHTML.setAttribute('class', 'flexContainer  disabled');
+  } else {
+    button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
+    taskHTML.setAttribute('class', 'flexContainer');
+  }
+}
+
+// Edit task
+function eventEditTask(id) {
+  const taskFormModal = document.querySelector('#taskFormModal');
+  const saveTask = document.querySelector('#saveTask');
+  callEditForm(id);
+  taskFormModal.removeAttribute('hidden');
+  saveTask.setAttribute('value', `${id}`);
+}
+
+function refreshTaskListeners() {
+  // Get the button that shows task details
+  const showDetailAll = document.querySelectorAll('.showDetail'); /* Task */
+  // Get the button that toggle the task completion
+  const completeTaskAll = document.querySelectorAll('.completeTask'); /* Task */
+  // Get the button that edit the task
+  const editTaskAll = document.querySelectorAll('.editTask'); /* Task */
+  // Get the button that delete the task
+  const deleteTaskAll = document.querySelectorAll('.deleteTask'); /* Task */
+
+  showDetailAll.forEach((button) => {
+    button.addEventListener('click', () => {
+      eventTaskToggle(button);
+    });
+  });
+
+  completeTaskAll.forEach((button) => {
+    button.addEventListener('click', () => {
+      eventCompletionToggle(button);
+    });
+  });
+
+  editTaskAll.forEach((button) => {
+    button.addEventListener('click', () => {
+      eventEditTask(parseInt(button.id.match(/\d+/gm), 10));
+    });
+  });
+
+  deleteTaskAll.forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = parseInt(button.id.match(/\d+/gm), 10);
+      removeTaskFromTasks(id);
+    });
+  });
+}
+
+export default refreshTaskListeners;

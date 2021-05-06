@@ -1,7 +1,9 @@
-import { populateStorage } from './utilities.js';
+import populateStorage from './utilities.js';
 import { saveNewProject, drawProjects } from './projectsHTML.js';
-import { toggleTaskCompletion, } from './tasksLogic.js';
-import { saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks } from './tasksHTML.js';
+import refreshTaskListeners from './tasksEvents.js';
+import {
+  saveNewTask, drawTasks, saveEditedTask,
+} from './tasksHTML.js';
 
 // Populate localStorage on first use
 populateStorage('projects');
@@ -13,6 +15,7 @@ populateStorage('currentProject');
 // Draw the page on load
 drawTasks(); /* Task */
 drawProjects(); /* Project */
+refreshTaskListeners();
 
 // Get the modal
 const projectFormModal = document.querySelector('#projectFormModal'); /* Project */
@@ -32,18 +35,6 @@ const saveTask = document.querySelector('#saveTask'); /* Task */
 
 // Get the projects that to shows tasks by project
 const projectsAll = document.querySelectorAll('.projectSort'); /* Task */
-
-// Get the button that shows task details
-const showDetailAll = document.querySelectorAll('.showDetail'); /* Task */
-
-// Get the button that toggle the task completion
-const completeTaskAll = document.querySelectorAll('.completeTask'); /* Task */
-
-// Get the button that edit the task
-const editTaskAll = document.querySelectorAll('.editTask'); /* Task */
-
-// Get the button that delete the task
-const deleteTaskAll = document.querySelectorAll('.deleteTask'); /* Task */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -92,44 +83,14 @@ saveProject.addEventListener('click', () => {
 
 // Save new task
 saveTask.addEventListener('click', () => {
-  if (saveTask.value === 'new'){
+  if (saveTask.value === 'new') {
     saveNewTask();
+    refreshTaskListeners();
   } else {
-    saveEditedTask(parseInt(saveTask.value, 10))
+    saveEditedTask(parseInt(saveTask.value, 10));
   }
   taskFormModal.setAttribute('hidden', 'true');
   saveTask.value = '';
-});
-
-// Toggle task detail
-showDetailAll.forEach((button) => {
-  button.addEventListener('click', () => {
-    const id = parseInt(button.id.match(/\d+/gm), 10);
-    const taskDetail = document.querySelector(`#taskDetail${id}`);
-    if (taskDetail.hasAttribute('hidden')) {
-      taskDetail.removeAttribute('hidden');
-      button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
-    } else {
-      taskDetail.setAttribute('hidden', 'true');
-      button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
-    }
-  });
-});
-
-// Toggle Completion
-completeTaskAll.forEach((button) => {
-  button.addEventListener('click', () => {
-    const id = parseInt(button.id.match(/\d+/gm), 10);
-    const taskHTML = document.querySelector(`#task${id}`).firstChild;
-    const completed = toggleTaskCompletion(id);
-    if (completed) {
-      button.setAttribute('class', 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask');
-      taskHTML.setAttribute('class', 'flexContainer  disabled');
-    } else {
-      button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
-      taskHTML.setAttribute('class', 'flexContainer');
-    }
-  });
 });
 
 // Sort tasks by project
@@ -159,23 +120,5 @@ projectsAll.forEach((button) => {
       }
       localStorage.setItem('currentProject', JSON.stringify(button.textContent));
     }
-  });
-});
-
-// Edit task
-editTaskAll.forEach((button) => {
-  button.addEventListener('click', () => {
-    const id = parseInt(button.id.match(/\d+/gm), 10);
-    callEditForm(id);
-    taskFormModal.removeAttribute('hidden');
-    saveTask.setAttribute('value', `${id}`);
-  });
-});
-
-// Delete task
-deleteTaskAll.forEach((button) => {
-  button.addEventListener('click', () => {
-    const id = parseInt(button.id.match(/\d+/gm), 10);
-    removeTaskFromTasks(id);
   });
 });

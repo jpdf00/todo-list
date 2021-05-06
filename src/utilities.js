@@ -27,4 +27,4 @@ function populateStorage(title) {
   }
 }
 
-export { populateStorage };
+export default populateStorage;

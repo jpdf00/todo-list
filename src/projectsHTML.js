@@ -3,7 +3,7 @@ import { addProjectToProjects } from './projectsLogic.js';
 const ProjectHTML = (project) => {
   const currentProject = JSON.parse(localStorage.getItem('currentProject'));
 
-  const projectItemClass = (project.name === currentProject) ? 'itemCardReversed flexContainer' : 'itemCard flexContainer'
+  const projectItemClass = (project.name === currentProject) ? 'itemCardReversed flexContainer' : 'itemCard flexContainer';
 
   const projectItem = document.createElement('div');
   projectItem.setAttribute('class', `${projectItemClass}`);
