@@ -4,7 +4,8 @@ import {
 } from './tasksHTML.js';
 
 // Toggle task detail
-function eventTaskToggle(button) {
+function eventTaskToggle(e) {
+  const button = e.target;
   const id = parseInt(button.id.match(/\d+/gm), 10);
   const taskDetail = document.querySelector(`#taskDetail${id}`);
   if (taskDetail.hasAttribute('hidden')) {
@@ -17,7 +18,8 @@ function eventTaskToggle(button) {
 }
 
 // Toggle task completion
-function eventCompletionToggle(button) {
+function eventCompletionToggle(e) {
+  const button = e.target;
   const id = parseInt(button.id.match(/\d+/gm), 10);
   const taskHTML = document.querySelector(`#task${id}`).firstChild;
   const completed = toggleTaskCompletion(id);
@@ -31,12 +33,21 @@ function eventCompletionToggle(button) {
 }
 
 // Edit task
-function eventEditTask(id) {
+function eventEditTask(e) {
+  const button = e.target;
+  const id = parseInt(button.id.match(/\d+/gm), 10);
   const taskFormModal = document.querySelector('#taskFormModal');
   const saveTask = document.querySelector('#saveTask');
   callEditForm(id);
   taskFormModal.removeAttribute('hidden');
   saveTask.setAttribute('value', `${id}`);
+}
+
+// Delete task
+function eventDeleteTask(e) {
+  const button = e.target;
+  const id = parseInt(button.id.match(/\d+/gm), 10);
+  removeTaskFromTasks(id);
 }
 
 function refreshTaskListeners() {
@@ -50,28 +61,19 @@ function refreshTaskListeners() {
   const deleteTaskAll = document.querySelectorAll('.deleteTask'); /* Task */
 
   showDetailAll.forEach((button) => {
-    button.addEventListener('click', () => {
-      eventTaskToggle(button);
-    });
+    button.addEventListener('click', eventTaskToggle);
   });
 
   completeTaskAll.forEach((button) => {
-    button.addEventListener('click', () => {
-      eventCompletionToggle(button);
-    });
+    button.addEventListener('click', eventCompletionToggle);
   });
 
   editTaskAll.forEach((button) => {
-    button.addEventListener('click', () => {
-      eventEditTask(parseInt(button.id.match(/\d+/gm), 10));
-    });
+    button.addEventListener('click', eventEditTask);
   });
 
   deleteTaskAll.forEach((button) => {
-    button.addEventListener('click', () => {
-      const id = parseInt(button.id.match(/\d+/gm), 10);
-      removeTaskFromTasks(id);
-    });
+    button.addEventListener('click', eventDeleteTask);
   });
 }
 
