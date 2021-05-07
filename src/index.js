@@ -1,6 +1,7 @@
 import populateStorage from './utilities.js';
 import { saveNewProject, drawProjects } from './projectsHTML.js';
 import refreshTaskListeners from './tasksEvents.js';
+import refreshProjectsListener from './projectsEvents.js';
 import {
   saveNewTask, drawTasks, saveEditedTask,
 } from './tasksHTML.js';
@@ -15,26 +16,26 @@ populateStorage('currentProject');
 // Draw the page on load
 drawTasks(); /* Task */
 drawProjects(); /* Project */
-refreshTaskListeners();
+
+// Add event listeners
+refreshTaskListeners(); /* Task */
+refreshProjectsListener(); /* Project */
 
 // Get the modal
-const projectFormModal = document.querySelector('#projectFormModal'); /* Project */
 const taskFormModal = document.querySelector('#taskFormModal'); /* Task */
+const projectFormModal = document.querySelector('#projectFormModal'); /* Project */
 
 // Get the button that opens the modal
-const btnNewProject = document.querySelector('#btnNewProject'); /* Project */
 const btnNewTask = document.querySelector('#btnNewTask'); /* Task */
+const btnNewProject = document.querySelector('#btnNewProject'); /* Project */
 
 // Get the button that closes the modal
-const btnCloseProject = document.querySelector('#btnCloseProject'); /* Project */
 const btnCloseTask = document.querySelector('#btnCloseTask'); /* Task */
+const btnCloseProject = document.querySelector('#btnCloseProject'); /* Project */
 
 // Get the button that saves the information
-const saveProject = document.querySelector('#saveProject'); /* Project */
 const saveTask = document.querySelector('#saveTask'); /* Task */
-
-// Get the projects that to shows tasks by project
-const projectsAll = document.querySelectorAll('.projectSort'); /* Task */
+const saveProject = document.querySelector('#saveProject'); /* Project */
 
 // Show project form
 btnNewProject.addEventListener('click', () => {
@@ -77,6 +78,7 @@ window.onclick = (event) => {
 // Save new project
 saveProject.addEventListener('click', () => {
   saveNewProject();
+  refreshProjectsListener();
   projectFormModal.setAttribute('hidden', 'true');
   saveProject.value = '';
 });
@@ -91,34 +93,4 @@ saveTask.addEventListener('click', () => {
   }
   taskFormModal.setAttribute('hidden', 'true');
   saveTask.value = '';
-});
-
-// Sort tasks by project
-projectsAll.forEach((button) => {
-  button.addEventListener('click', () => {
-    const tasksContent = document.querySelector('#tasksContent').children;
-    if (button.parentElement.attributes[0].value === 'itemCardReversed flexContainer') {
-      button.parentElement.attributes[0].value = 'itemCard flexContainer';
-      for (let i = 0; i < tasksContent.length; i += 1) {
-        tasksContent[i].setAttribute('class', 'itemCard flexColumn');
-      }
-      localStorage.setItem('currentProject', JSON.stringify(''));
-    } else {
-      button.parentElement.attributes[0].value = 'itemCardReversed flexContainer';
-      projectsAll.forEach((item) => {
-        if (item !== button) {
-          item.parentElement.attributes[0].value = 'itemCard flexContainer';
-        }
-      });
-      for (let i = 0; i < tasksContent.length; i += 1) {
-        const taskProject = tasksContent[i].lastElementChild.firstElementChild.firstElementChild.lastElementChild;
-        if (button.textContent === taskProject.textContent) {
-          tasksContent[i].setAttribute('class', 'itemCard flexColumn');
-        } else {
-          tasksContent[i].setAttribute('class', 'itemCard displayNone');
-        }
-      }
-      localStorage.setItem('currentProject', JSON.stringify(button.textContent));
-    }
-  });
 });
