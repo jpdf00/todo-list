@@ -1,6 +1,6 @@
 import { toggleTaskCompletion } from './tasksLogic.js';
 import {
-  callEditForm, removeTaskFromTasks,
+  callEditFormTasks, removeTaskFromTasks,
 } from './tasksHTML.js';
 
 // Toggle task detail
@@ -38,7 +38,7 @@ function eventEditTask(e) {
   const id = parseInt(button.id.match(/\d+/gm), 10);
   const taskFormModal = document.querySelector('#taskFormModal');
   const saveTask = document.querySelector('#saveTask');
-  callEditForm(id);
+  callEditFormTasks(id);
   taskFormModal.removeAttribute('hidden');
   saveTask.setAttribute('value', `${id}`);
 }

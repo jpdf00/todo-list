@@ -1,5 +1,8 @@
 import {
-  addTaskToTasks, retrieveTask, editTask, deleteTask,
+  addTaskToTasks,
+  retrieveTask,
+  editTask,
+  deleteTask,
 } from './tasksLogic.js';
 
 const TaskHTML = (task) => {
@@ -110,7 +113,13 @@ function saveNewTask() {
   const taskPriority = document.querySelector('#taskPriority');
   const taskProject = document.querySelector('#taskProject');
   const taskDueDate = document.querySelector('#taskDueDate');
-  const task = addTaskToTasks(taskName.value, taskDescription.value, taskPriority.value, taskProject.value, taskDueDate.value);
+  const task = addTaskToTasks(
+    taskName.value,
+    taskDescription.value,
+    taskPriority.value,
+    taskProject.value,
+    taskDueDate.value,
+  );
   appendTaskToTasks(task);
   taskName.value = '';
   taskDescription.value = '';
@@ -119,7 +128,7 @@ function saveNewTask() {
   taskDueDate.value = '';
 }
 
-function callEditForm(id) {
+function callEditFormTasks(id) {
   const taskName = document.querySelector('#taskName');
   const taskDescription = document.querySelector('#taskDescription');
   const taskPriority = document.querySelector('#taskPriority');
@@ -144,7 +153,14 @@ function saveEditedTask(id) {
   const taskPriorityId = document.querySelector(`#taskPriority${id}`);
   const taskProjectId = document.querySelector(`#taskProject${id}`);
   const taskDueDateId = document.querySelector(`#taskDueDate${id}`);
-  const task = editTask(id, taskName.value, taskDescription.value, taskPriority.value, taskProject.value, taskDueDate.value);
+  editTask(
+    id,
+    taskName.value,
+    taskDescription.value,
+    taskPriority.value,
+    taskProject.value,
+    taskDueDate.value,
+  );
   taskNameId.textContent = taskName.value;
   taskDescriptionId.textContent = taskDescription.value;
   taskPriorityId.textContent = taskPriority.value;
@@ -157,10 +173,38 @@ function saveEditedTask(id) {
   taskDueDate.value = '';
 }
 
+function changeTaskByProject(projectOld, projectNew) {
+  const tasksContent = document.querySelector('#tasksContent').children;
+  for (let i = 0; i < tasksContent.length; i += 1) {
+    const taskProject = tasksContent[i]
+      .lastElementChild
+      .firstElementChild
+      .firstElementChild
+      .lastElementChild;
+    if (projectOld === taskProject.textContent) {
+      taskProject.textContent = projectNew;
+    }
+  }
+}
+
 function removeTaskFromTasks(id) {
   const taskItem = document.querySelector(`#task${id}`);
   deleteTask(id);
   taskItem.parentElement.removeChild(taskItem);
+}
+
+function removeTaskByProject(project) {
+  const tasksContent = document.querySelector('#tasksContent').children;
+  for (let i = 0; i < tasksContent.length; i += 1) {
+    const taskProject = tasksContent[i]
+      .lastElementChild
+      .firstElementChild
+      .firstElementChild
+      .lastElementChild;
+    if (project === taskProject.textContent) {
+      tasksContent[i].parentElement.removeChild(tasksContent[i]);
+    }
+  }
 }
 
 function drawTasks() {
@@ -171,5 +215,11 @@ function drawTasks() {
 }
 
 export {
-  saveNewTask, drawTasks, callEditForm, saveEditedTask, removeTaskFromTasks,
+  saveNewTask,
+  drawTasks,
+  callEditFormTasks,
+  saveEditedTask,
+  removeTaskFromTasks,
+  removeTaskByProject,
+  changeTaskByProject,
 };

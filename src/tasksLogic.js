@@ -39,6 +39,18 @@ function editTask(id, name, description, priority, project, dueDate) {
   return tasks[i];
 }
 
+function editTaskByProject(projectOld, projectNew) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  for (let i = 0; ;) {
+    i = tasks.findIndex((item) => item.project === projectOld);
+    if (i === -1 || projectOld === projectNew) {
+      break;
+    }
+    tasks[i].project = projectNew;
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 function deleteTask(id) {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   const i = tasks.findIndex((item) => item.id === id);
@@ -47,6 +59,24 @@ function deleteTask(id) {
   return tasks[i];
 }
 
+function deleteTaskByProject(project) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  for (let i = 0; ;) {
+    i = tasks.findIndex((item) => item.project === project);
+    if (i === -1) {
+      break;
+    }
+    tasks.splice(i, 1);
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 export {
-  addTaskToTasks, toggleTaskCompletion, retrieveTask, editTask, deleteTask,
+  addTaskToTasks,
+  toggleTaskCompletion,
+  retrieveTask,
+  editTask,
+  editTaskByProject,
+  deleteTask,
+  deleteTaskByProject,
 };

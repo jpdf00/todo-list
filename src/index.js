@@ -1,5 +1,5 @@
 import populateStorage from './utilities.js';
-import { saveNewProject, drawProjects } from './projectsHTML.js';
+import { saveNewProject, drawProjects, saveEditedProject } from './projectsHTML.js';
 import refreshTaskListeners from './tasksEvents.js';
 import refreshProjectsListener from './projectsEvents.js';
 import {
@@ -77,8 +77,12 @@ window.onclick = (event) => {
 
 // Save new project
 saveProject.addEventListener('click', () => {
-  saveNewProject();
-  refreshProjectsListener();
+  if (saveProject.value === 'new') {
+    saveNewProject();
+    refreshProjectsListener();
+  } else {
+    saveEditedProject(parseInt(saveProject.value, 10));
+  }
   projectFormModal.setAttribute('hidden', 'true');
   saveProject.value = '';
 });

@@ -1,4 +1,5 @@
-// Sort tasks by project
+import { removeProjectFromProjects, callEditFormProjects } from './projectsHTML.js';
+// Sort tasks by project removeProjectFromProjects
 function eventSortTaskByProject(e) {
   const button = e.target;
   const tasksContent = document.querySelector('#tasksContent').children;
@@ -17,7 +18,11 @@ function eventSortTaskByProject(e) {
       }
     });
     for (let i = 0; i < tasksContent.length; i += 1) {
-      const taskProject = tasksContent[i].lastElementChild.firstElementChild.firstElementChild.lastElementChild;
+      const taskProject = tasksContent[i]
+        .lastElementChild
+        .firstElementChild
+        .firstElementChild
+        .lastElementChild;
       if (button.textContent === taskProject.textContent) {
         tasksContent[i].setAttribute('class', 'itemCard flexColumn');
       } else {
@@ -28,11 +33,41 @@ function eventSortTaskByProject(e) {
   }
 }
 
+function eventEditProject(e) {
+  const button = e.target;
+  const id = parseInt(button.id.match(/\d+/gm), 10);
+  const projectFormModal = document.querySelector('#projectFormModal');
+  const saveProject = document.querySelector('#saveProject');
+  callEditFormProjects(id);
+  projectFormModal.removeAttribute('hidden');
+  saveProject.setAttribute('value', `${id}`);
+}
+
+// Delete task
+function eventDeleteProject(e) {
+  const button = e.target;
+  const id = parseInt(button.id.match(/\d+/gm), 10);
+  removeProjectFromProjects(id);
+}
+
 function refreshProjectsListener() {
   // Get the projects that to shows tasks by project
   const projectsAll = document.querySelectorAll('.projectSort');
+  // Get the delete project buttons
+  const deleteProjectAll = document.querySelectorAll('.deleteProject');
+  // Get the edit project buttons
+  const editProjectAll = document.querySelectorAll('.editProject');
+
   projectsAll.forEach((button) => {
     button.addEventListener('click', eventSortTaskByProject);
+  });
+
+  deleteProjectAll.forEach((button) => {
+    button.addEventListener('click', eventDeleteProject);
+  });
+
+  editProjectAll.forEach((button) => {
+    button.addEventListener('click', eventEditProject);
   });
 }
 
