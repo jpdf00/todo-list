@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box; }
 
-p, h2 {
+p, h2, body {
   margin: 0; }
 
 /* Flex container */
@@ -9,7 +9,7 @@ p, h2 {
   display: flex; }
 
 .container {
-  margin: 5px 15px 0 5px;
+  margin: 0px 15px 0 5px;
   padding: 3px; }
 
 .flexColumn {
@@ -25,7 +25,13 @@ p, h2 {
 
 .projectsSize {
   width: 25%;
-  min-width: 300px; }
+  min-width: 300px;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  position: sticky;
+  overflow-y: scroll;
+}
 
 .tasksSize {
   width: 75%;

@@ -86,6 +86,7 @@ function saveEditedProject(id) {
 function removeProjectFromProjects(id) {
   const projectItem = document.querySelector(`#project${id}`);
   const project = deleteProject(id);
+  console.log(project);
   deleteTaskByProject(project[0].name);
   removeTaskByProject(project[0].name);
   projectItem.parentElement.removeChild(projectItem);

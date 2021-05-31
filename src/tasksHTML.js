@@ -195,7 +195,7 @@ function removeTaskFromTasks(id) {
 
 function removeTaskByProject(project) {
   const tasksContent = document.querySelector('#tasksContent').children;
-  for (let i = 0; i < tasksContent.length; i += 1) {
+  for (let i = 0; i < tasksContent.length; ) {
     const taskProject = tasksContent[i]
       .lastElementChild
       .firstElementChild
@@ -203,6 +203,8 @@ function removeTaskByProject(project) {
       .lastElementChild;
     if (project === taskProject.textContent) {
       tasksContent[i].parentElement.removeChild(tasksContent[i]);
+    } else {
+      i += 1
     }
   }
 }
