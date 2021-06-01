@@ -22,17 +22,17 @@
       </div>
 
       <div class="modal" id="projectFormModal" hidden>
-        <div class="modalContent">
-          <form class="displayFlex">
+        <div class="projectsModalContent">
+          <button type="button" class="projectsClose" id="btnCloseProject">
+            <i class="fas fa-times-circle"></i>
+          </button>
+          <form class="projectsForm">
             <input type="text" class="projectsInputName" placeholder="Enter project name..." id="projectName" autofocus="true">
 
             <button type="button" class="projectsSave" id="saveProject">
               <i class="fas fa-save"></i>
             </button>
 
-            <button type="button" class="projectsClose" id="btnCloseProject">
-              <i class="fas fa-times-circle"></i>
-            </button>
           </form>
         </div>
       </div>
@@ -45,7 +45,7 @@
 
     <section class="container tasksSize">
 
-      <div class="displayFlex">
+      <div class="displayFlex container">
         <h1 class="title">Tasks</h1>
 
         <button type="button" class="btn btnNewModal" id="btnNewTask">

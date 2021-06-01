@@ -77,9 +77,24 @@ p, h2, body {
   margin: 0 0 0 5px;
 }
 
+/* Modal Content/Box */
+.projectsModalContent {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #aaa;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.projectsForm {
+  display: flex;
+  margin: 0 0 24px 24px;
+}
+
 .projectsInputName {
   padding: 5px;
-  flex-basis: 100%;
+  flex-basis: 95.6%;
   border: 2px outset #444;
   border-right: 0;
   border-radius: 5px 0 0 5px;
@@ -117,7 +132,7 @@ p, h2, body {
   border-radius: 5px 5px ;
   font-size: 15px;
   padding: 3px 4.5px;
-  margin: 0 0 auto 5px;
+  margin: 0 0 0 98.3%;
 }
 
 .projectsClose:hover,
@@ -125,7 +140,6 @@ p, h2, body {
   background-image: linear-gradient(to bottom right, #555, #222);
   color: #fff;
 }
-
 /* ---------------------------------- */
 
 .container {
