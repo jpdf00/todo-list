@@ -5,8 +5,128 @@ p, h2, body {
   margin: 0; }
 
 /* Flex container */
-.flexContainer {
-  display: flex; }
+.displayFlex {
+  display: flex;
+}
+
+.mainContainer {
+  display: flex;
+  padding: 0 5px 0 5px;
+  margin: 0;
+}
+
+/* -------------- Projects -------------- */
+.projectsContainer {
+  width: 25%;
+  min-width: 300px;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  position: sticky;
+  overflow-y: scroll;
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+}
+
+.projectsTitle {
+  display: flex;
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+  color: #666;
+}
+
+.projectsContent{
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+}
+
+.projectCard {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #aaa;
+  color: #666;
+  background-color: #fff;
+  font-size: 20px;
+}
+
+.projectCardReversed {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #aaa;
+  color: #fff;
+  background-color: #666;
+  font-size: 20px;
+}
+
+.projectSort {
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.projectEdit {
+  cursor: pointer;
+  margin: 0 5px 0 0;
+}
+
+.projectDelete {
+  cursor: pointer;
+  margin: 0 0 0 5px;
+}
+
+.projectsInputName {
+  padding: 5px;
+  flex-basis: 100%;
+  border: 2px outset #444;
+  border-right: 0;
+  border-radius: 5px 0 0 5px;
+  color: #444;
+  font-size: 24px;
+}
+
+.projectsInputName:focus {
+  outline: none;
+  box-shadow: 39px 0 2px 3px #aaa, 0 0 2px 3px #aaa;
+}
+
+.projectsSave {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom right, #777, #444);
+  color: #f8f8f8;
+  border: 2px outset #444;
+  border-left: 0;
+  border-radius: 0 5px 5px 0;
+  font-size: 24px;
+  padding: 0 8px;
+}
+
+.projectsSave:hover,
+.projectsSave:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
+  color: #fff;
+}
+
+.projectsClose {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom right, #777, #444);
+  color: #f8f8f8;
+  border: 0;
+  border-radius: 5px 5px ;
+  font-size: 15px;
+  padding: 3px 4.5px;
+  margin: 0 0 auto 5px;
+}
+
+.projectsClose:hover,
+.projectsClose:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
+  color: #fff;
+}
+
+/* ---------------------------------- */
 
 .container {
   margin: 0px 15px 0 5px;
@@ -23,15 +143,6 @@ p, h2, body {
   width: 95%;
   margin-right: auto; }
 
-.projectsSize {
-  width: 25%;
-  min-width: 300px;
-  height: 100vh;
-  top: 0;
-  bottom: 0;
-  position: sticky;
-  overflow-y: scroll;
-}
 
 .tasksSize {
   width: 75%;
@@ -49,23 +160,27 @@ p, h2, body {
 .btn:focus {
   background-image: linear-gradient(to bottom right, #555, #222);
   color: #fff;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 /* The Close Button */
 .btnClose {
   font-size: 15px;
   padding: 3px 4.5px;
-  margin-bottom: auto; }
+  margin-bottom: auto;
+}
 
 /* The Button to open the form for new project */
 .btnNewModal {
   font-size: 32px;
-  padding: 0 8px; }
+  padding: 0 8px;
+}
 
 /* The Button to save a project */
 .btnSaveNew {
   padding: 6px 10px;
-  font-size: 24px; }
+  font-size: 24px;
+}
 
 /* The Modal (background) */
 .modal {
@@ -84,7 +199,8 @@ p, h2, body {
   background-color: black;
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */ }
+  /* Black w/ opacity */
+}
 
 /* Modal Content/Box */
 .modalContent {
@@ -95,14 +211,16 @@ p, h2, body {
   box-shadow: 2px 2px 5px #aaa;
   border-radius: 5px;
   width: 80%;
-  /* Could be more or less, depending on screen size */ }
+  /* Could be more or less, depending on screen size */
+}
 
 /* Title */
 .title {
   padding: 5px;
   text-align: center;
   margin: 0;
-  font-size: 40px; }
+  font-size: 40px;
+}
 
 .inputLabel {
   display: flex;
@@ -129,14 +247,16 @@ p, h2, body {
   box-shadow: 0 0 5px 5px #aaa; }
 
 .inputBorder {
-  border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0;
+}
 
 .itemCard {
   margin-bottom: 10px;
   padding: 8px;
   box-shadow: 2px 2px 5px #aaa;
   color: #666;
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 .itemCardReversed {
   margin-bottom: 10px;
@@ -144,7 +264,8 @@ p, h2, body {
   box-shadow: 2px 2px 5px #aaa;
   color: #fff;
   background-color: #666;
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 .projectBtn {
   margin-left: auto;
@@ -185,6 +306,7 @@ p, h2, body {
 
 .project {
   cursor: pointer;
-  font-weight: bolder; }
+  font-weight: bolder;
+}
 
 /*# sourceMappingURL=main.css.map */
