@@ -4,17 +4,17 @@ function eventSortTaskByProject(e) {
   const button = e.target;
   const tasksContent = document.querySelector('#tasksContent').children;
   const projectsAll = document.querySelectorAll('.projectSort');
-  if (button.parentElement.attributes[0].value === 'itemCardReversed flexContainer') {
-    button.parentElement.attributes[0].value = 'itemCard flexContainer';
+  if (button.parentElement.attributes[0].value === 'projectCardReversed') {
+    button.parentElement.attributes[0].value = 'projectCard';
     for (let i = 0; i < tasksContent.length; i += 1) {
       tasksContent[i].setAttribute('class', 'itemCard flexColumn');
     }
     localStorage.setItem('currentProject', JSON.stringify(''));
   } else {
-    button.parentElement.attributes[0].value = 'itemCardReversed flexContainer';
+    button.parentElement.attributes[0].value = 'projectCardReversed';
     projectsAll.forEach((item) => {
       if (item !== button) {
-        item.parentElement.attributes[0].value = 'itemCard flexContainer';
+        item.parentElement.attributes[0].value = 'projectCard';
       }
     });
     for (let i = 0; i < tasksContent.length; i += 1) {
@@ -54,9 +54,9 @@ function refreshProjectsListener() {
   // Get the projects that to shows tasks by project
   const projectsAll = document.querySelectorAll('.projectSort');
   // Get the delete project buttons
-  const deleteProjectAll = document.querySelectorAll('.deleteProject');
+  const deleteProjectAll = document.querySelectorAll('.projectDelete');
   // Get the edit project buttons
-  const editProjectAll = document.querySelectorAll('.editProject');
+  const editProjectAll = document.querySelectorAll('.projectEdit');
 
   projectsAll.forEach((button) => {
     button.addEventListener('click', eventSortTaskByProject);

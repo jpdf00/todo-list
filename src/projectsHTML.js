@@ -7,36 +7,40 @@ import { changeTaskByProject, removeTaskByProject } from './tasksHTML.js';
 const ProjectHTML = (project) => {
   const currentProject = JSON.parse(localStorage.getItem('currentProject'));
 
-  const projectItemClass = (project.name === currentProject) ? 'itemCardReversed flexContainer' : 'itemCard flexContainer';
+  const projectCardClass = (project.name === currentProject) ? 'projectCardReversed' : 'projectCard';
 
-  const projectItem = document.createElement('div');
-  projectItem.setAttribute('class', `${projectItemClass}`);
-  projectItem.setAttribute('id', `project${project.id}`);
+  const projectCard = document.createElement('div');
+  projectCard.setAttribute('class', `${projectCardClass}`);
+  projectCard.setAttribute('id', `project${project.id}`);
 
   const projectName = document.createElement('p');
-  projectName.setAttribute('class', 'project projectSort');
+  projectName.setAttribute('class', 'projectSort');
   projectName.setAttribute('id', `projectName${project.id}`);
   projectName.textContent = project.name;
 
+  const projectBtns = document.createElement('div');
+  projectBtns.setAttribute('class', 'projectBtns');
+
   const editIcon = document.createElement('i');
-  editIcon.setAttribute('class', 'editProject projectBtn fas fa-edit');
-  editIcon.setAttribute('id', `editProject${project.id}`);
+  editIcon.setAttribute('class', 'projectEdit fas fa-edit');
+  editIcon.setAttribute('id', `projectEdit${project.id}`);
 
   const deleteIcon = document.createElement('i');
-  deleteIcon.setAttribute('class', 'deleteProject projectBtn far fa-trash-alt');
-  deleteIcon.setAttribute('id', `deleteProject${project.id}`);
+  deleteIcon.setAttribute('class', 'projectDelete far fa-trash-alt');
+  deleteIcon.setAttribute('id', `projectDelete${project.id}`);
 
-  projectItem.appendChild(projectName);
-  projectItem.appendChild(editIcon);
-  projectItem.appendChild(deleteIcon);
+  projectCard.appendChild(projectName);
+  projectBtns.appendChild(editIcon);
+  projectBtns.appendChild(deleteIcon);
+  projectCard.appendChild(projectBtns);
 
-  return projectItem;
+  return projectCard;
 };
 
 function appendProjectToProjects(project) {
   const projectsContent = document.querySelector('#projectsContent');
-  const projectItem = ProjectHTML(project);
-  projectsContent.appendChild(projectItem);
+  const projectCard = ProjectHTML(project);
+  projectsContent.appendChild(projectCard);
 }
 
 function appendProjectToTaskSelect(name) {
@@ -84,12 +88,12 @@ function saveEditedProject(id) {
 }
 
 function removeProjectFromProjects(id) {
-  const projectItem = document.querySelector(`#project${id}`);
+  const projectCard = document.querySelector(`#project${id}`);
   const project = deleteProject(id);
   console.log(project);
   deleteTaskByProject(project[0].name);
   removeTaskByProject(project[0].name);
-  projectItem.parentElement.removeChild(projectItem);
+  projectCard.parentElement.removeChild(projectCard);
 }
 
 function drawProjects() {

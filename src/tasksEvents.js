@@ -25,10 +25,10 @@ function eventCompletionToggle(e) {
   const completed = toggleTaskCompletion(id);
   if (completed) {
     button.setAttribute('class', 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask');
-    taskHTML.setAttribute('class', 'flexContainer  disabled');
+    taskHTML.setAttribute('class', 'displayFlex  disabled');
   } else {
     button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
-    taskHTML.setAttribute('class', 'flexContainer');
+    taskHTML.setAttribute('class', 'displayFlex');
   }
 }
 

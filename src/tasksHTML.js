@@ -14,21 +14,21 @@ const TaskHTML = (task) => {
   taskItem.setAttribute('class', `${taskItemClass}`);
   taskItem.setAttribute('id', `task${task.id}`);
 
-  const flexContainer1 = document.createElement('div');
-  const toggleContainer = (task.completed) ? 'flexContainer  disabled' : 'flexContainer';
-  flexContainer1.setAttribute('class', `${toggleContainer}`);
+  const displayFlex1 = document.createElement('div');
+  const toggleContainer = (task.completed) ? 'displayFlex  disabled' : 'displayFlex';
+  displayFlex1.setAttribute('class', `${toggleContainer}`);
 
   const name = document.createElement('h2');
   name.setAttribute('class', 'title');
   name.setAttribute('id', `taskName${task.id}`);
   name.textContent = task.name;
-  flexContainer1.appendChild(name);
+  displayFlex1.appendChild(name);
 
   const date = document.createElement('p');
   date.setAttribute('class', 'dateFormat');
   date.setAttribute('id', `taskDueDate${task.id}`);
   date.textContent = task.dueDate.split('-').reverse().join('/');
-  flexContainer1.appendChild(date);
+  displayFlex1.appendChild(date);
 
   const flexColumn = document.createElement('div');
   flexColumn.setAttribute('class', 'flexColumn');
@@ -44,20 +44,20 @@ const TaskHTML = (task) => {
   showDetail.setAttribute('id', `showDetail${task.id}`);
   flexColumn.appendChild(showDetail);
 
-  flexContainer1.appendChild(flexColumn);
+  displayFlex1.appendChild(flexColumn);
 
-  taskItem.appendChild(flexContainer1);
+  taskItem.appendChild(displayFlex1);
 
   const taskDetail = document.createElement('div');
   taskDetail.setAttribute('class', 'taskDetail');
   taskDetail.setAttribute('id', `taskDetail${task.id}`);
   taskDetail.setAttribute('hidden', 'true');
 
-  const flexContainer2 = document.createElement('div');
-  flexContainer2.setAttribute('class', 'flexContainer');
+  const displayFlex2 = document.createElement('div');
+  displayFlex2.setAttribute('class', 'displayFlex');
 
   const detailStyle1 = document.createElement('div');
-  detailStyle1.setAttribute('class', 'flexContainer detailStyle detailSize');
+  detailStyle1.setAttribute('class', 'displayFlex detailStyle detailSize');
 
   const description = document.createElement('p');
   description.setAttribute('class', 'marginRight');
@@ -77,10 +77,10 @@ const TaskHTML = (task) => {
   project.textContent = task.project;
   detailStyle1.appendChild(project);
 
-  flexContainer2.appendChild(detailStyle1);
+  displayFlex2.appendChild(detailStyle1);
 
   const detailStyle2 = document.createElement('div');
-  detailStyle2.setAttribute('class', 'flexContainer detailStyle');
+  detailStyle2.setAttribute('class', 'displayFlex detailStyle');
 
   const editTask = document.createElement('i');
   editTask.setAttribute('class', 'editTask projectBtn marginRight fas fa-edit');
@@ -92,9 +92,9 @@ const TaskHTML = (task) => {
   deleteTask.setAttribute('id', `deleteTask${task.id}`);
   detailStyle2.appendChild(deleteTask);
 
-  flexContainer2.appendChild(detailStyle2);
+  displayFlex2.appendChild(detailStyle2);
 
-  taskDetail.appendChild(flexContainer2);
+  taskDetail.appendChild(displayFlex2);
 
   taskItem.appendChild(taskDetail);
 
