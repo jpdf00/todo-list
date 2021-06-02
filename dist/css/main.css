@@ -1,10 +1,11 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 p, h2, body {
-  margin: 0; }
+  margin: 0;
+}
 
-/* Flex container */
 .displayFlex {
   display: flex;
 }
@@ -30,59 +31,34 @@ p, h2, body {
 
 .projectsTitle {
   display: flex;
+  justify-content: space-between;
   margin: 0px 15px 0 5px;
   padding: 3px;
-  color: #666;
+  color: #444;
 }
 
-.projectsContent{
-  margin: 0px 15px 0 5px;
-  padding: 3px;
+.projectsNew {
+  background-image: linear-gradient(to bottom right, #777, #444);
+  color: #f8f8f8;
+  border: none;
+  border-radius: 5px;
+  font-size: 39px;
+  padding: 0 9px;
+  cursor: pointer;
 }
 
-.projectCard {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 8px;
-  box-shadow: 2px 2px 5px #aaa;
-  color: #666;
-  background-color: #fff;
-  font-size: 20px;
-}
-
-.projectCardReversed {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 8px;
-  box-shadow: 2px 2px 5px #aaa;
+.projectsNew:hover,
+.projectsNew:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
   color: #fff;
-  background-color: #666;
-  font-size: 20px;
-}
-
-.projectSort {
-  cursor: pointer;
-  font-weight: bolder;
-}
-
-.projectEdit {
-  cursor: pointer;
-  margin: 0 5px 0 0;
-}
-
-.projectDelete {
-  cursor: pointer;
-  margin: 0 0 0 5px;
 }
 
 /* Modal Content/Box */
 .projectsModalContent {
-  background-color: #fff;
+  background-color: #f8f8f8;
   margin: 15% auto;
   padding: 5px;
-  box-shadow: 2px 2px 5px #aaa;
+  box-shadow: 2px 2px 5px #444;
   border-radius: 5px;
   width: 80%;
 }
@@ -104,7 +80,11 @@ p, h2, body {
 
 .projectsInputName:focus {
   outline: none;
-  box-shadow: 39px 0 2px 3px #aaa, 0 0 2px 3px #aaa;
+  box-shadow: -2px 0 2px 3px #aaa;
+}
+
+.projectsInputName:focus + .projectsSave {
+  box-shadow: 2px 0 2px 3px #aaa;
 }
 
 .projectsSave {
@@ -140,61 +120,243 @@ p, h2, body {
   background-image: linear-gradient(to bottom right, #555, #222);
   color: #fff;
 }
+
+.projectsContent{
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+}
+
+.projectCard {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #444;
+  color: #444;
+  background-color: #fff;
+  font-size: 20px;
+}
+
+.projectCardReversed {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #444;
+  color: #fff;
+  background-color: #444;
+  font-size: 20px;
+}
+
+.projectSort {
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.projectEdit {
+  cursor: pointer;
+  margin: 0 5px 0 0;
+}
+
+.projectDelete {
+  cursor: pointer;
+  margin: 0 0 0 5px;
+}
 /* ---------------------------------- */
 
-.container {
-  margin: 0px 15px 0 5px;
-  padding: 3px; }
-
-.flexColumn {
-  display: flex;
-  flex-direction: column; }
-
-.displayNone {
-  display: none; }
-
-.columnSize {
-  width: 95%;
-  margin-right: auto; }
-
-
-.tasksSize {
+/* -------------- Tasks -------------- */
+.tasksContainer {
   width: 75%;
-  min-width: 600px; }
+  min-width: 600px;
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+}
 
-/* Button generic */
-.btn {
+.tasksTitle {
+  display: flex;
+  justify-content: space-between;
+  color: #444;
+  margin: 0px 15px 0 5px;
+  padding: 3px;
+}
+
+.tasksNew {
   background-image: linear-gradient(to bottom right, #777, #444);
   color: #f8f8f8;
   border: none;
   border-radius: 5px;
-  margin-left: auto; }
-
-.btn:hover,
-.btn:focus {
-  background-image: linear-gradient(to bottom right, #555, #222);
-  color: #fff;
+  font-size: 40px;
+  padding: 0 11px;
   cursor: pointer;
 }
 
-/* The Close Button */
-.btnClose {
+.tasksNew:hover,
+.tasksNew:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
+  color: #fff;
+}
+
+/* Modal Content/Box */
+.tasksModalContent {
+  background-color: #f8f8f8;
+  margin: 15% auto;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #444;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.tasksForm {
+  display: flex;
+  flex-direction: column;
+  margin: 0 24px 24px 24px;
+}
+
+.tasksInputLabel {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 2px inset #444;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  color: #444;
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  width: 10%;
+}
+
+.tasksInputText {
+  padding: 5px;
+  flex-basis: 95.6%;
+  border: 2px outset #444;
+  border-radius: 5px;
+  color: #444;
+  font-size: 24px;
+  margin: 0 0 5px 0;
+}
+
+.tasksInputSelect {
+  padding: 5px;
+  flex-basis: 95.6%;
+  border: 2px outset #444;
+  border-radius: 0 5px 5px 0;
+  color: #444;
+  font-size: 24px;
+  margin: 0 0 5px 0;
+}
+
+.tasksInputText:focus,
+.tasksInputSelect:focus {
+  outline: none;
+  box-shadow: 2px 0 2px 3px #aaa;
+}
+
+.tasksSave {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom right, #777, #444);
+  color: #f8f8f8;
+  border: 0;
+  border-radius: 5px;
+  font-size: 24px;
+  padding: 8px;
+}
+
+.tasksSave:hover,
+.tasksSave:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
+  color: #fff;
+}
+
+.tasksClose {
+  cursor: pointer;
+  background-image: linear-gradient(to bottom right, #777, #444);
+  color: #f8f8f8;
+  border: 0;
+  border-radius: 5px 5px ;
   font-size: 15px;
   padding: 3px 4.5px;
-  margin-bottom: auto;
+  margin: 0 0 0 98.3%;
 }
 
-/* The Button to open the form for new project */
-.btnNewModal {
-  font-size: 32px;
-  padding: 0 8px;
+.tasksClose:hover,
+.tasksClose:focus {
+  background-image: linear-gradient(to bottom right, #555, #222);
+  color: #fff;
 }
 
-/* The Button to save a project */
-.btnSaveNew {
-  padding: 6px 10px;
-  font-size: 24px;
+.tasksContent{
+  margin: 0px 15px 0 5px;
+  padding: 3px;
 }
+
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 5px #444;
+  color: #444;
+  font-size: 20px;
+}
+
+.taskCardInfo {
+  display: flex;
+  width: 100%;
+}
+
+.taskDate {
+  margin: auto 50px auto auto;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.taskShow {
+  cursor: pointer;
+  margin: auto 10px 0 auto;
+}
+
+.taksPending {
+  margin: auto 50px auto 10px;
+  cursor: pointer;
+  color: #d60000;
+}
+
+.taksCompleted {
+  margin: auto 50px auto 10px;
+  cursor: pointer;
+  color: #009400;
+}
+
+.taskDetailInfo {
+  width: 100%;
+  padding: 10px 5px 5px 5px;
+}
+
+.taskDetailText {
+  box-shadow: 3px 10px 4px -8px #444;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 5px 77.5px;
+  padding: 5px;
+}
+
+.taskDetailBtns {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 0 5px 5px;
+}
+
+.taskEdit {
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+.taskDelete {
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+/* ---------------------------------- */
 
 /* The Modal (background) */
 .modal {
@@ -216,18 +378,6 @@ p, h2, body {
   /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
-.modalContent {
-  background-color: #fff;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
-  box-shadow: 2px 2px 5px #aaa;
-  border-radius: 5px;
-  width: 80%;
-  /* Could be more or less, depending on screen size */
-}
-
 /* Title */
 .title {
   padding: 5px;
@@ -236,91 +386,49 @@ p, h2, body {
   font-size: 40px;
 }
 
-.inputLabel {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border: 2px inset #444;
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  color: #444;
-  margin: 0 0 5px 0;
-  font-size: 24px; }
-
-.inputText {
-  padding: 5px;
-  flex-basis: 90%;
-  border: 2px inset #444;
-  border-radius: 5px;
-  color: #444;
-  margin: 0 5px 5px 0;
-  font-size: 24px; }
-
-.inputText:focus {
-  outline: none;
-  box-shadow: 0 0 5px 5px #aaa; }
-
-.inputBorder {
-  border-radius: 0 5px 5px 0;
+.taskPriorityLowest {
+  background-color: #80eaff;
 }
 
-.itemCard {
-  margin-bottom: 10px;
-  padding: 8px;
-  box-shadow: 2px 2px 5px #aaa;
-  color: #666;
-  font-size: 20px;
+/*.taskPriorityLowest {
+background-color: #004080;
+}*/
+
+.taskPriorityLow {
+  background-color: #aaff99;
 }
 
-.itemCardReversed {
-  margin-bottom: 10px;
-  padding: 8px;
-  box-shadow: 2px 2px 5px #aaa;
-  color: #fff;
-  background-color: #666;
-  font-size: 20px;
+/*.taskPriorityLow {
+  background-color: #093300;
+}*/
+
+.taskPriorityMedium {
+  background-color: #ffffb3;
 }
 
-.projectBtn {
-  margin-left: auto;
-  cursor: pointer; }
+/*.taskPriorityMedium {
+  background-color: #b39500;
+}*/
 
-.alignDown {
-  margin: auto 5px 0 auto;
-  vertical-align: bottom; }
 
-.alignUp {
-  margin: 0 5px auto auto;
-  vertical-align: bottom; }
+.taskPriorityHigh {
+  background-color: #ffdd99;
+}
 
-.dateFormat {
-  margin: auto auto auto auto;
-  font-size: 40px;
-  font-weight: bold; }
+/*.taskPriorityHigh {
+  background-color: #cc6600;
+}*/
 
-.detailStyle {
-  padding: 5px;
-  margin-top: 5px; }
+.taskPriorityHighest {
+  background-color: #ffb3b3;
+}
 
-.detailSize {
-  width: 95%; }
-
-.marginRight {
-  margin-right: 20px; }
-
-.taksPending {
-  color: #d60000; }
-
-.taksCompleted {
-  color: #009400; }
+/*.taskPriorityHighest {
+background-color: #800000;
+}*/
 
 .disabled {
-  text-decoration: overline;
-  color: #aaa; }
-
-.project {
-  cursor: pointer;
-  font-weight: bolder;
+  color: #aaa;
 }
 
 /*# sourceMappingURL=main.css.map */

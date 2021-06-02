@@ -7,7 +7,7 @@ function eventSortTaskByProject(e) {
   if (button.parentElement.attributes[0].value === 'projectCardReversed') {
     button.parentElement.attributes[0].value = 'projectCard';
     for (let i = 0; i < tasksContent.length; i += 1) {
-      tasksContent[i].setAttribute('class', 'itemCard flexColumn');
+      tasksContent[i].removeAttribute('hidden');
     }
     localStorage.setItem('currentProject', JSON.stringify(''));
   } else {
@@ -19,14 +19,15 @@ function eventSortTaskByProject(e) {
     });
     for (let i = 0; i < tasksContent.length; i += 1) {
       const taskProject = tasksContent[i]
+        .firstElementChild
         .lastElementChild
         .firstElementChild
         .firstElementChild
         .lastElementChild;
       if (button.textContent === taskProject.textContent) {
-        tasksContent[i].setAttribute('class', 'itemCard flexColumn');
+        tasksContent[i].removeAttribute('hidden');
       } else {
-        tasksContent[i].setAttribute('class', 'itemCard displayNone');
+        tasksContent[i].setAttribute('hidden', 'true');
       }
     }
     localStorage.setItem('currentProject', JSON.stringify(button.textContent));

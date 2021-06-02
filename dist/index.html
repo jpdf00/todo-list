@@ -16,7 +16,7 @@
       <div class="projectsTitle">
         <h1 class="title">Projects</h1>
 
-        <button type="button" class="btn btnNewModal" id="btnNewProject">
+        <button type="button" class="projectsNew" id="btnNewProject">
           <i class="fas fa-folder-plus"></i>
         </button>
       </div>
@@ -43,56 +43,58 @@
 
     </section>
 
-    <section class="container tasksSize">
+    <section class="tasksContainer">
 
-      <div class="displayFlex container">
+      <div class="tasksTitle">
         <h1 class="title">Tasks</h1>
 
-        <button type="button" class="btn btnNewModal" id="btnNewTask">
+        <button type="button" class="tasksNew" id="btnNewTask">
           <i class="fas fa-calendar-plus"></i>
         </button>
       </div>
 
       <div class="modal" id="taskFormModal" hidden>
-        <div class="modalContent">
-          <form class="displayFlex">
-            <div class="flexColumn columnSize">
-              <input type="text" class="inputText" id="taskName" placeholder="Enter a Name for your task...">
+        <div class="tasksModalContent">
+          <button type="button" class="tasksClose" id="btnCloseTask">
+            <i class="fas fa-times-circle"></i>
+          </button>
+          <form class="tasksForm">
 
-              <input type="text" class="inputText" id="taskDescription" placeholder="Enter a Description for your task...">
+            <input type="text" class="tasksInputText" id="taskName" placeholder="Enter a Name for your task...">
 
-              <div class="displayFlex">
-                <label for="taskPriority" class="inputLabel">Priority</label>
-                <select class="inputText inputBorder" aria-label="Default select example" id="taskPriority">
-                  <option value="Low">Low</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Urgent">Urgent</option>
-                </select>
+            <input type="text" class="tasksInputText" id="taskDescription" placeholder="Enter a Description for your task...">
 
-                <label for="taskProject" class="inputLabel">Project</label>
-                <select class="inputText inputBorder" aria-label="Default select example" id="taskProject">
-
-                </select>
-
-                <label for="taskDueDate" class="inputLabel">Due Date</label>
-                <input type="date" class="inputText inputBorder" id="taskDueDate">
-              </div>
+            <div class="displayFlex">
+              <label for="taskPriority" class="tasksInputLabel">Priority</label>
+              <select class="tasksInputSelect" aria-label="Default select example" id="taskPriority">
+                <option value="Lowest Priority">Lowest Priority</option>
+                <option value="Low Priority">Low Priority</option>
+                <option value="Medium Priority">Medium Priority</option>
+                <option value="High Priority">High Priority</option>
+                <option value="Highest Priority">Highest Priority</option>
+              </select>
             </div>
 
-            <div class="flexColumn">
-              <button type="button" class="btn btnClose" id="btnCloseTask">
-                <i class="fas fa-times-circle"></i>
-              </button>
+            <div class="displayFlex">
+              <label for="taskProject" class="tasksInputLabel">Project</label>
+              <select class="tasksInputSelect" id="taskProject">
 
-              <button type="button" class="btn btnSaveNew" data-bs-dismiss="modal" id="saveTask">
-                <i class="fas fa-save"></i>
-              </button>
+              </select>
             </div>
+
+            <div class="displayFlex">
+              <label for="taskDueDate" class="tasksInputLabel">Due Date</label>
+              <input type="date" class="tasksInputSelect" id="taskDueDate">
+            </div>
+
+            <button type="button" class="tasksSave" data-bs-dismiss="modal" id="saveTask">
+              <i class="fas fa-save"></i>
+            </button>
           </form>
         </div>
       </div>
 
-      <div id="tasksContent" class="container">
+      <div id="tasksContent" class="tasksContent">
 
       </div>
 

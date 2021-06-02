@@ -10,10 +10,10 @@ function eventTaskToggle(e) {
   const taskDetail = document.querySelector(`#taskDetail${id}`);
   if (taskDetail.hasAttribute('hidden')) {
     taskDetail.removeAttribute('hidden');
-    button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-up showDetail');
+    button.setAttribute('class', 'fas fa-angle-double-up taskShow');
   } else {
     taskDetail.setAttribute('hidden', 'true');
-    button.setAttribute('class', 'alignDown projectBtn fas fa-angle-double-down showDetail');
+    button.setAttribute('class', 'fas fa-angle-double-down taskShow');
   }
 }
 
@@ -21,14 +21,14 @@ function eventTaskToggle(e) {
 function eventCompletionToggle(e) {
   const button = e.target;
   const id = parseInt(button.id.match(/\d+/gm), 10);
-  const taskHTML = document.querySelector(`#task${id}`).firstChild;
+  const taskCardInfo = document.querySelector(`#taskCardInfo${id}`);
   const completed = toggleTaskCompletion(id);
   if (completed) {
-    button.setAttribute('class', 'taksCompleted alignUp projectBtn far fa-calendar-check completeTask');
-    taskHTML.setAttribute('class', 'displayFlex  disabled');
+    button.setAttribute('class', 'taksCompleted far fa-calendar-check completeTask');
+    taskCardInfo.setAttribute('class', 'taskCardInfo  disabled');
   } else {
-    button.setAttribute('class', 'taksPending alignUp projectBtn far fa-calendar completeTask');
-    taskHTML.setAttribute('class', 'displayFlex');
+    button.setAttribute('class', 'taksPending far fa-calendar completeTask');
+    taskCardInfo.setAttribute('class', 'taskCardInfo');
   }
 }
 
@@ -52,15 +52,15 @@ function eventDeleteTask(e) {
 
 function refreshTaskListeners() {
   // Get the button that shows task details
-  const showDetailAll = document.querySelectorAll('.showDetail'); /* Task */
+  const taskShowAll = document.querySelectorAll('.taskShow'); /* Task */
   // Get the button that toggle the task completion
   const completeTaskAll = document.querySelectorAll('.completeTask'); /* Task */
   // Get the button that edit the task
-  const editTaskAll = document.querySelectorAll('.editTask'); /* Task */
+  const editTaskAll = document.querySelectorAll('.taskEdit'); /* Task */
   // Get the button that delete the task
-  const deleteTaskAll = document.querySelectorAll('.deleteTask'); /* Task */
+  const deleteTaskAll = document.querySelectorAll('.taskDelete'); /* Task */
 
-  showDetailAll.forEach((button) => {
+  taskShowAll.forEach((button) => {
     button.addEventListener('click', eventTaskToggle);
   });
 

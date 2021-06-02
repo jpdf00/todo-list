@@ -6,7 +6,7 @@ function populateStorage(title) {
 
     switch (title) {
       case 'projects':
-        item = [Project(0, 'Default Project')];
+        item = [Project(0, 'Default')];
         break;
       case 'tasks':
         item = [];
