@@ -21,7 +21,7 @@ The Users are able to do the following:
 
 ## Live Demo
 
-[Todo List Live Demo](https://adfpizarro.github.io/todo-list/)
+[Todo List Live Demo](https://jpdf00.github.io/todo-list/)
 
 ## Getting Started
 
