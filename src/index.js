@@ -1,111 +1,100 @@
-import { addProject, getProjects, drawProjects } from './projects';
+import populateStorage from './utilities.js';
+import { saveNewProject, drawProjects, saveEditedProject } from './projectsHTML.js';
+import refreshTaskListeners from './tasksEvents.js';
+import refreshProjectsListener from './projectsEvents.js';
 import {
-  addTask, drawTasksByProject, changeTask, dltTask, changePriority, drawFormTasks, updateTask,
-} from './tasks';
+  saveNewTask, drawTasks, saveEditedTask,
+} from './tasksHTML.js';
 
-function completTask() {
-  const completTask = document.querySelectorAll('.completTask');
-  completTask.forEach((check) => {
-    check.addEventListener('click', () => {
-      changeTask(parseInt(check.id.match(/\d+/gm), 10));
-    });
-  });
-}
+// Populate localStorage on first use
+populateStorage('projects');
+populateStorage('tasks');
+populateStorage('projectCount');
+populateStorage('taskCount');
+populateStorage('currentProject');
 
-function modifyPriority() {
-  const priorityDropdown = document.querySelectorAll('.changePriority');
-  priorityDropdown.forEach((dropDown) => {
-    dropDown.addEventListener('change', () => {
-      changePriority(parseInt(dropDown.id.match(/\d+/gm), 10), dropDown.value);
-    });
-  });
-}
+// Draw the page on load
+drawTasks(); /* Task */
+drawProjects(); /* Project */
 
-function deleteTask() {
-  const deleteTask = document.querySelectorAll('.deleteTask');
-  deleteTask.forEach((button) => {
-    button.addEventListener('click', () => {
-      dltTask(parseInt(button.id.match(/\d+/gm), 10));
-    });
-  });
-}
+// Add event listeners
+refreshTaskListeners(); /* Task */
+refreshProjectsListener(); /* Project */
 
-function saveTask() {
-  const save = document.querySelector('.updateTask');
-  save.addEventListener('click', () => {
-    const project = updateTask(parseInt(save.id.match(/\d+/gm), 10));
-    const editForm = document.querySelector('#trForm');
-    const tBody = document.getElementById('tableBody');
-    tBody.removeChild(editForm);
-    const taskContainer = document.querySelector('#taskContainer');
-    taskContainer.innerHTML = '';
-    taskContainer.append(drawTasksByProject(project));
-    // eslint-disable-next-line no-use-before-define
-    editTask();
-  });
-}
+// Get the modal
+const taskFormModal = document.querySelector('#taskFormModal'); /* Task */
+const projectFormModal = document.querySelector('#projectFormModal'); /* Project */
 
-function editTask() {
-  const editTask = document.querySelectorAll('.editTask');
-  editTask.forEach((button) => {
-    button.addEventListener('click', () => {
-      drawFormTasks(parseInt(button.id.match(/\d+/gm), 10));
-      saveTask();
-    });
-  });
-}
+// Get the button that opens the modal
+const btnNewTask = document.querySelector('#btnNewTask'); /* Task */
+const btnNewProject = document.querySelector('#btnNewProject'); /* Project */
 
-function refreshEventListener() {
-  const projectButton = document.querySelectorAll('.projectButton');
-  projectButton.forEach((button) => {
-    button.addEventListener('click', () => {
-      const taskContainer = document.querySelector('#taskContainer');
-      taskContainer.innerHTML = '';
-      taskContainer.append(drawTasksByProject(button.textContent));
-      completTask();
-      deleteTask();
-      modifyPriority();
-      editTask();
-    });
-  });
-  completTask();
-  deleteTask();
-  modifyPriority();
-  editTask();
-}
+// Get the button that closes the modal
+const btnCloseTask = document.querySelector('#btnCloseTask'); /* Task */
+const btnCloseProject = document.querySelector('#btnCloseProject'); /* Project */
 
-const taskSubmit = document.querySelector('#taskSubmit');
+// Get the button that saves the information
+const saveTask = document.querySelector('#saveTask'); /* Task */
+const saveProject = document.querySelector('#saveProject'); /* Project */
 
-taskSubmit.addEventListener('click', () => {
-  const taskContainer = document.querySelector('#taskContainer');
-  const name = document.getElementById('taskName').value;
-  const description = document.getElementById('taskDescription').value;
-  const priority = document.getElementById('taskPriority').value;
-  const project = document.getElementById('taskProject').value;
-  const dueDate = document.getElementById('taskDueDate').value;
-  taskContainer.innerHTML = '';
-  taskContainer.append(addTask(name, description, priority, project, dueDate));
-  refreshEventListener();
+// Show project form
+btnNewProject.addEventListener('click', () => {
+  projectFormModal.removeAttribute('hidden');
+  saveProject.setAttribute('value', 'new');
 });
 
-const projectSubmit = document.querySelector('#projectSubmit');
-
-projectSubmit.addEventListener('click', () => {
-  const projectContainer = document.querySelector('#projectContainer');
-  const name = document.getElementById('projectName').value;
-  projectContainer.innerHTML = '';
-  projectContainer.append(addProject(name));
-  getProjects('#taskProject');
-  refreshEventListener();
+// Show task form
+btnNewTask.addEventListener('click', () => {
+  taskFormModal.removeAttribute('hidden');
+  saveTask.setAttribute('value', 'new');
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  const projectContainer = document.querySelector('#projectContainer');
-  const taskContainer = document.querySelector('#taskContainer');
-  taskContainer.innerHTML = '';
-  projectContainer.innerHTML = '';
-  projectContainer.append(drawProjects());
-  taskContainer.append(drawTasksByProject('all'));
-  getProjects('#taskProject');
-  refreshEventListener();
+// Hide project form (for close button)
+btnCloseProject.addEventListener('click', () => {
+  projectFormModal.setAttribute('hidden', 'true');
+  saveProject.value = '';
+});
+
+// Hide task form (for close button)
+btnCloseTask.addEventListener('click', () => {
+  taskFormModal.setAttribute('hidden', 'true');
+  saveTask.value = '';
+});
+
+// Hide form (for background)
+window.onclick = (event) => {
+  // Project form
+  if (event.target === projectFormModal) {
+    projectFormModal.setAttribute('hidden', 'true');
+    saveProject.value = '';
+  }
+  // Task Form
+  if (event.target === taskFormModal) {
+    taskFormModal.setAttribute('hidden', 'true');
+    saveTask.value = '';
+  }
+};
+
+// Save new project
+saveProject.addEventListener('click', () => {
+  if (saveProject.value === 'new') {
+    saveNewProject();
+    refreshProjectsListener();
+  } else {
+    saveEditedProject(parseInt(saveProject.value, 10));
+  }
+  projectFormModal.setAttribute('hidden', 'true');
+  saveProject.value = '';
+});
+
+// Save new task
+saveTask.addEventListener('click', () => {
+  if (saveTask.value === 'new') {
+    saveNewTask();
+    refreshTaskListeners();
+  } else {
+    saveEditedTask(parseInt(saveTask.value, 10));
+  }
+  taskFormModal.setAttribute('hidden', 'true');
+  saveTask.value = '';
 });
